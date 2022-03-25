@@ -11,4 +11,8 @@ router.get('/login', function(req, res, next) {
   res.render('login', { title: 'Login de usuario' });
 });
 
+router.get('/createAccount', function(req, res, next) {
+  res.render('createAccount', { title: 'Creacion de cuenta' });
+});
+
 module.exports = router;

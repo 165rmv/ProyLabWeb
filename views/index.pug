@@ -2,15 +2,14 @@ extends layout
 
 block externalcss
   style.
-    #map { height: 700px; width: 70%; margin: 30px auto 0 auto; }
-
 
 
 block content
   h1= title
-  h1= "home page"
   p Welcome to #{title}
   a(href='/login') Log-in
+  br
+  a(href='/createAccount') Create an account
   br
   br
   
