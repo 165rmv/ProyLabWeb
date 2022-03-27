@@ -12,12 +12,14 @@ block content
   br
   a(href='/createAccount') Create an account
   br
-  form
-    input(type='text' label='Name')
+  form#sign-in-form
+    input#sign-in-mail(type='email' label='correo' placeholder='xxxx@xxx.xxx' autfocus required)
     br
-    input(type='text' label='Password')
+    input#sign-in-pass(type='password' label='password' placeholder='********' required)
     br
-    button(type='button') Click Me!
+    button(type='submit') Log-in
   br
   a(href='/shops') Check out our shops
+
+  //script(src="routes/login.js") 
   

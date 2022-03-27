@@ -12,10 +12,16 @@ block content
   br
   a(href='/login') Login
   br
-  form
-    input(type='text' label='Name')
+  form#sign-up-form
+    input#sign-up-mail(type='email' label='mail' placeholder='xxxx@xxx.xxx' autofocus required)
     br
-    input(type='text' label='Password')
+    input#sign-up-pass(type='password' label='password' placeholder='********' required)
     br
-    button(type='button') Click Me!
+    button(type='submit') Registrarse
+    br
+    button(type='button') registrarse con Gmail 
+  
+  script(src="../routes/createAccount.js") 
+  //script( type = "text/javascript",src="../routes/createAccount.js") 
+  //script(type = "text/javascript", src=&quot;../../javascript/createAccLogic.js&quot;)
   
