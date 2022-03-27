@@ -1,3 +1,4 @@
+/*
 import { initializeApp } from 'firebase/app'; 
 
 const firebaseApp = initializeApp({
@@ -23,3 +24,4 @@ onAuthStateChanged(auth, user =>{
     console.log('No user'); 
   }
 });
+*/
