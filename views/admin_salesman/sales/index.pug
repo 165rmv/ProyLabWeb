@@ -1,0 +1,35 @@
+extends ../../layout 
+
+block content
+    h1=title 
+    br
+    a(href='/admin_salesman') Regresar
+    br
+    a(href='/admin_salesman/sales/add') Agregar venta
+    br
+    table.table 
+        thead 
+            tr 
+                th ID
+                th Cantidad de productos
+                th Fecha
+                th Nombre del vendedor
+                th
+        
+        tbody 
+            tr
+                td 
+                td 
+                td 
+                td 
+                td 
+                    a(href = '/admin_salesman/sales/details') Detalles 
+
+                        //
+                            each bici in bicis
+                                tr
+                                    td=bici.id
+                                    td=bici.color
+                                    td=bici.modelo
+                                    td=bici.lat
+                                    td=bici.lon

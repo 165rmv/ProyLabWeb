@@ -1,0 +1,34 @@
+extends ../../layout 
+
+block content
+    h1 Agregar venta nueva 
+    br
+    a(href='/admin_salesman/sales') Regresar
+    br
+    //    
+        form(action='/bicicletas/create' method='POST')
+            table.table 
+                tr 
+                    td
+                        label(for='color') Color:
+                    td
+                        input#color(type='text' name='color')
+                tr 
+                    td
+                        label(for='modelo') Modelo:
+                    td
+                        input#modelo(type='text' name='modelo')
+                tr 
+                    td
+                        label(for='lat') Lat:
+                    td
+                        input#lat(type='text' maxlength='9' name='lat')
+                tr 
+                    td
+                        label(for='lon') Lon:
+                    td
+                        input#lon(type='text' maxlength='10' name='lon')
+                tr
+                    td 
+                    td
+                        input.btn(type='submit' value='ADD')
