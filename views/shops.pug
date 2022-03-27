@@ -1,5 +1,23 @@
 extends layout 
 
+block externalcss
+  style.
+    #map{
+    height: 500px;
+    width: 70%;
+    margin: 0 auto;
+    border: 1px solid black;
+    }
+    h1{
+        margin: 0;
+    }
+
 block content
     h1=title
     h2="Visita alguna de nuestras sucursales"
+    br
+    h3=Mapa
+    #map 
+    br
+    a(href="/login") Back to Login 
+    br
