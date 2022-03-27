@@ -1,3 +1,6 @@
+const { initializeApp } = require("firebase-admin/app");
+//import { initializeApp } from 'firebase/app';
+
 var express = require('express');
 var router = express.Router();
 
