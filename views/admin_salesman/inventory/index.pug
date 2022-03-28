@@ -1,36 +1,40 @@
 extends ../../layout
 
 block content 
-    h1=title 
+    #centerInd
+        h1=title 
     br
-    a(href='/admin_salesman') Regresar
+    #spreadLess2
+        a(href='/admin_salesman') Regresar
+        br
+        a(href='/admin_salesman/inventory/add') Agregar producto
+        br
+        a(href='/admin_salesman/inventory/allProducts') Administrar productos
     br
-    a(href='/admin_salesman/inventory/add') Agregar producto
-    br
-    a(href='/admin_salesman/inventory/allProducts') Administrar productos
-    br
-    table.table 
-        thead 
-            tr 
-                th ID Producto
-                th Nombre
-                th Tipo de prenda
-                th Cantidad en bodega
-                th Talla
-                th 
-        
-        tbody 
-            each dt in data
-                tr
-                    td=dt.id_producto 
-                    td=dt.nombre
-                    td=dt.tipo
-                    td=dt.cantidad
-                    td=dt.talla
-                    td 
-                        a(href = 'inventory/'+ dt.id + '/edit') Editar 
-                    td 
-                        form.inline(method='post' action= 'inventory/'+ dt.id + '/delete')
-                            input(type='hidden' name='id' value= dt.id)
-                            button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
-                                = 'Eliminar'
+    #table
+        table.table 
+            thead 
+                tr 
+                    th ID Producto
+                    th Nombre
+                    th Tipo de prenda
+                    th Cantidad en bodega
+                    th Talla
+                    th 
+                    th 
+            
+            tbody 
+                each dt in data
+                    tr
+                        td=dt.id_producto 
+                        td=dt.nombre
+                        td=dt.tipo
+                        td=dt.cantidad
+                        td=dt.talla
+                        td 
+                            a(href = 'inventory/'+ dt.id + '/edit') Editar 
+                        td 
+                            form.inline(method='post' action= 'inventory/'+ dt.id + '/delete')
+                                input(type='hidden' name='id' value= dt.id)
+                                button.link-button(type='submit' name='submit_param' value='submit_value' class='btn')
+                                    = 'Eliminar'

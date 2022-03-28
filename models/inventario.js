@@ -70,8 +70,6 @@ exports.deleteInventario = (id) => {
 
 exports.deleteProducto = (id) => {
     idInt = parseInt(id)
-    result = knex('productos').where({id: idInt}).del();
-    alert("Error: "+err.message)
-    return result
+    return knex('productos').where({id: idInt}).del();
 }
 

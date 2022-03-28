@@ -6,20 +6,27 @@ block externalcss
 
 
 block content
-  h1= title
-  p Welcome to #{title}
-  a(href='/') Home
-  br
-  a(href='/createAccount') Create an account
-  br
-  form
-    input(type='text' label='Name')
+  #centerInd
+    h1= title
+  #bl1Log
+    #genLog1
+      a(href='/') Regresar a la página principal
     br
-    input(type='text' label='Password')
-    br
-    button(type='button') Click Me!
+    
+    form
+      #genLog1
+        label(for="user")='Usuario: '
+        input(type='text' label='Name')
+      br
+      #genLog1
+        label(for="user")='Contraseña: '
+        input(type='text' label='Password')
+      br
+      #genLog1
+        button(type='button') Click Me!
+  
   br
-  a(href='/shops') Check out our shops
-  br
-  a(href='admin_salesman/') admin_salesman index 
+  #aLog
+    a(href='/createAccount') Crear una cuenta nueva
+    a(href='admin_salesman/') admin_salesman index 
   

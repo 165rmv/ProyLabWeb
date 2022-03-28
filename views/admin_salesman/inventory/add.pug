@@ -1,51 +1,53 @@
 extends ../../layout 
 
 block content
-    h1=title 
-    br
-    a(href='/admin_salesman/inventory') Regresar
+    #centerInd
+        h1=title 
+        br
+        a(href='/admin_salesman/inventory') Regresar
     br
     form(action='/admin_salesman/inventory/add' method='POST')
-        table.table 
-            tr 
-                td
-                    label(for='nombre') Nombre:
-                td
-                    input#nombre(type='text' name='nombre')
-            tr 
-                td
-                    label(for='tipo') Tipo de prenda:
-                td
-                    input#tipo(type='text' name='tipo')
-            tr 
-                td
-                    label(for='talla') Talla ( o XCH, CH, M, G, XG):
-                td
-                    input#talla(type='text' maxlength='10' name='talla')
-            tr 
-                td
-                    label(for='genero') Genero (H / M):
-                td
-                    input#genero(type='text' maxlength='10' name='genero')
-            tr
-             
-                td
-                    label(for='precio') Precio (MXN):
-                td
-                    input#precio(type='text' maxlength='9' name='precio')
-            tr
+        #table
+            table.table 
+                tr 
+                    td
+                        label(for='nombre') Nombre:
+                    td
+                        input#nombre(type='text' name='nombre')
+                tr 
+                    td
+                        label(for='tipo') Tipo de prenda:
+                    td
+                        input#tipo(type='text' name='tipo')
+                tr 
+                    td
+                        label(for='talla') Talla ( o XCH, CH, M, G, XG):
+                    td
+                        input#talla(type='text' maxlength='10' name='talla')
+                tr 
+                    td
+                        label(for='genero') Genero (H / M):
+                    td
+                        input#genero(type='text' maxlength='10' name='genero')
+                tr
+                
+                    td
+                        label(for='precio') Precio (MXN):
+                    td
+                        input#precio(type='text' maxlength='9' name='precio')
+                tr
 
-                td
-                    label(for='cantidad') Cantidad de prendas:
-                td
-                    input#cantidad(type='text' maxlength='9' name='cantidad')
-            tr
-             
-                td
-                    label(for='descripcion') Descripcion:
-                td
-                    textarea#descripcion(name="descripcion", cols="30", rows="10")
-            tr
-                td 
-                td
-                    input.btn(type='submit' value='ADD')
+                    td
+                        label(for='cantidad') Cantidad de prendas:
+                    td
+                        input#cantidad(type='text' maxlength='9' name='cantidad')
+                tr
+                
+                    td
+                        label(for='descripcion') Descripcion:
+                    td
+                        textarea#descripcion(name="descripcion", cols="30", rows="10")
+                tr
+                    td 
+                    td
+                        input.btn(type='submit' value='ADD')

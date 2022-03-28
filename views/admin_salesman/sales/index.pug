@@ -1,29 +1,32 @@
 extends ../../layout 
 
 block content
-    h1=title 
+    #centerInd
+        h1=title 
     br
-    a(href='/admin_salesman') Regresar
+    #spreadLess
+        a(href='/admin_salesman') Regresar
+        br
+        a(href='/admin_salesman/sales/add') Agregar venta
     br
-    a(href='/admin_salesman/sales/add') Agregar venta
-    br
-    table.table 
-        thead 
-            tr 
-                th ID Venta
-                th Productos por venta
-                th Fecha de la venta
-                th Nombre del vendedor
-                th Total de la venta
-                th
-        
-        tbody
-            each dt in data
-                tr
-                    td=dt.id
-                    td=dt.cantidad
-                    td=dt.created_at 
-                    td=dt.nombre 
-                    td='$'+dt.total_venta 
-                    td 
-                        a(href ='sales/'+dt.id+ '/details') Detalles
+    #table
+        table.table 
+            thead 
+                tr 
+                    th ID Venta
+                    th Productos por venta
+                    th Fecha de la venta
+                    th Nombre del vendedor
+                    th Total de la venta
+                    th
+            
+            tbody
+                each dt in data
+                    tr
+                        td=dt.id
+                        td=dt.cantidad
+                        td=dt.created_at 
+                        td=dt.nombre 
+                        td='$'+dt.total_venta 
+                        td 
+                            a(href ='sales/'+dt.id+ '/details') Detalles

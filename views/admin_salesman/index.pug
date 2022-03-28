@@ -1,11 +1,12 @@
 extends ../layout 
 
 block content
-    h1=title 
+    #centerInd
+        h1=title 
+        br
+        h2 Selecciona la pagina a la que se desea ir
     br
-    h2 Selecciona la pagina a la que se desea ir
-    br
-    #opciones 
+    #spreadInd 
         a(href='/admin_salesman/sales') Ventas
         br
-        a(href='/admin_salesman/inventory') inventario
+        a(href='/admin_salesman/inventory') Inventario

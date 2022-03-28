@@ -1,44 +1,46 @@
 extends ../../layout 
 
 block content
-    h1=title
-    br
-    a(href='/admin_salesman/inventory') Regresar
+    #centerInd
+        h1=title
+        br
+        a(href='/admin_salesman/inventory') Regresar
     
       
     form(action=`/admin_salesman/inventory/${data.id}/edit` method='POST')
-        table.table 
-            tr 
-                td
-                    label(for='nombre') nombre:
-                td
-                    label(for='nombreN')=data2.nombre
-            tr 
-                td
-                    label(for='tipo') Tipo de prenda:
-                td
-                    label(for='tipoN')=data2.tipo
-            tr  
-                td
-                    label(for='precio') Precio (MXN):
-                td
-                    label(for='precio')='$'+data2.precio
-            tr
-                td
-                    label(for='genero') Genero:
-                td
-                    label(for='generoN')=data2.genero
-            tr
-                td
-                    label(for='talla') Talla:
-                td
-                    input#talla(type='text' maxlength='9' name='talla' value=data.talla)
-            tr 
-                td
-                    label(for='cantidad') Cantidad de prendas:
-                td
-                    input#cantidad(type='text' maxlength='9' name='cantidad', value=data.cantidad)
-            tr
-                td 
-                td
-                    input.btn(type='submit' value='Actualizar')
+        #table
+            table.table 
+                tr 
+                    td
+                        label(for='nombre') nombre:
+                    td
+                        label(for='nombreN')=data2.nombre
+                tr 
+                    td
+                        label(for='tipo') Tipo de prenda:
+                    td
+                        label(for='tipoN')=data2.tipo
+                tr  
+                    td
+                        label(for='precio') Precio (MXN):
+                    td
+                        label(for='precio')='$'+data2.precio
+                tr
+                    td
+                        label(for='genero') Genero:
+                    td
+                        label(for='generoN')=data2.genero
+                tr
+                    td
+                        label(for='talla') Talla:
+                    td
+                        input#talla(type='text' maxlength='9' name='talla' value=data.talla)
+                tr 
+                    td
+                        label(for='cantidad') Cantidad de prendas:
+                    td
+                        input#cantidad(type='text' maxlength='9' name='cantidad', value=data.cantidad)
+                tr
+                    td 
+                    td
+                        input.btn(type='submit' value='Actualizar')

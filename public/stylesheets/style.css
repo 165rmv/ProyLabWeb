@@ -1,16 +1,77 @@
 body {
     padding: 20px;
     font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  }
-  
-  a {
-    color: #00B7FF;
+    background-color: #7EACE2;
+    background-image: url("../assets/clouds_png.png")
   }
   
   table th, table td{
-    border: 1px solid #666;
+    border: 1px groove rgb(180, 52, 174);
     padding: 8px;
   }
-  
-  
+
+  table th{
+    color:antiquewhite;
+    background-color: #5F53CF;
+  }
+#centerInd{
+  font-size: 18px;
+  display: flex;
+  justify-content:center;
+  align-items: center;
+  flex-direction: column;
+  color: #5F53CF;
+  letter-spacing: 2px;
+}
+
+#spreadInd, #aLog{
+  margin-top: 100px;
+  font-size: 25px;
+  color: #723FC5 !important;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+#spreadLess, #spreadLess2{
+  margin-top: 20px;
+  font-size: 25px;
+  color: #723FC5 !important;
+  text-decoration: none;
+  display: flex;
+  justify-content: space-around;
+}
+
+#spreadLess2{
+  justify-content: space-between;
+}
+
+#genLog1{
+  margin-top: 10px;
+  font-size: 17px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#genLog1 label{
+  margin-right: 15px;
+}
+
+a{
+  color: #723FC5 !important;
+}
+
+#table{
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+#table table{
+  border: groove;
+  color: #6d35c7;
+  text-align: center;
+}
+
   

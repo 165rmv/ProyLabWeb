@@ -26,7 +26,7 @@ onAuthStateChanged(auth, user =>{
 */
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Sistema de proyecto' });
+  res.render('index', { title: 'Aesthetic Fashion' });
 });
 
 router.get('/createAccount', function(req, res, next) {
