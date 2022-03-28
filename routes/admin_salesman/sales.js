@@ -9,8 +9,6 @@ router.get('/add', function(req, res, next) {
     res.render('admin_salesman/sales/add', {title: 'Agregar producto'});
 });
 
-router.get('/details', function(req, res, next) {
-    res.render('admin_salesman/sales/details', {title: 'Editar producto'});
-});
+router.get('/:id/details', salesController.details_sale);
 
 module.exports = router;

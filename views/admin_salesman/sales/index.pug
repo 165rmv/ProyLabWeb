@@ -10,26 +10,20 @@ block content
     table.table 
         thead 
             tr 
-                th ID
-                th Cantidad de productos
-                th Fecha
+                th ID Venta
+                th Productos por venta
+                th Fecha de la venta
                 th Nombre del vendedor
+                th Total de la venta
                 th
         
-        tbody 
-            tr
-                td 
-                td 
-                td 
-                td 
-                td 
-                    a(href = '/admin_salesman/sales/details') Detalles 
-
-                        //
-                            each bici in bicis
-                                tr
-                                    td=bici.id
-                                    td=bici.color
-                                    td=bici.modelo
-                                    td=bici.lat
-                                    td=bici.lon
+        tbody
+            each dt in data
+                tr
+                    td=dt.id
+                    td=dt.cantidad
+                    td=dt.created_at 
+                    td=dt.nombre 
+                    td='$'+dt.total_venta 
+                    td 
+                        a(href ='sales/'+dt.id+ '/details') Detalles

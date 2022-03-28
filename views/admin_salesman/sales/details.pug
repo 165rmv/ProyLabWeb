@@ -1,9 +1,24 @@
 extends ../../layout
 
 block content 
-    h1='Detalles para la venta '
-    //
-        + sale.id
+    h1='Detalles para la venta '+idTicket
     br
+    h2='Vendedor quien registró la venta: '+vendor[0].nombre
+    br
+    table.table 
+        thead 
+            tr 
+                th Nombre
+                th Precio
+                th Tipo de prenda
+        
+        tbody 
+            each dt in list_sold
+                tr
+                    td=dt.nombre 
+                    td=dt.precio
+                    td=dt.tipo
+    br
+    h2='Día, fecha y hora en la que se realizó la venta: '+timeStamp[0].created_at
     a(href='/admin_salesman/sales') Regresar
 

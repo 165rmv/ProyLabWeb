@@ -4,13 +4,16 @@ let inventoryController = require('../../controllers/admin_salesman/inventory');
 
 
 router.get('/', inventoryController.inventory_list);
+router.get('/add', inventoryController.inventory_create_get);
+router.post('/add', inventoryController.inventory_create_post);
+router.get('/:id/edit', inventoryController.inventory_update_get)
+router.post('/:id/edit', inventoryController.inventory_update_post)
+router.post('/:id/delete', inventoryController.inventory_delete_inventory_post)
+router.get('/allProducts', inventoryController.productos_list);
+router.get('/allProducts/:id/editProduct', inventoryController.productos_update_get);
+router.post('/allProducts/:id/editProduct', inventoryController.productos_update_post);
+router.post('/allProducts/:id/delete', inventoryController.products_delete_products_post)
 
-router.get('/add', function(req, res, next) {
-    res.render('admin_salesman/inventory/add', {title: 'Agregar producto'});
-});
 
-router.get('/edit', function(req, res, next) {
-    res.render('admin_salesman/inventory/edit', {title: 'Editar producto'});
-});
 
 module.exports = router;
