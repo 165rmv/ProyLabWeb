@@ -1,16 +1,23 @@
 extends ../../layout 
 
 block content
+    nav.navbar.mb-4.navbar-custom
+        .derecha
+            a.navbar-brand(href='/admin_salesman/inventory') Inventario
+            a.navbar-brand.active(href='/admin_salesman/sales') Ventas
+            a.navbar-brand(href='/admin_salesman/sales') Usuarios
+        .izquierda 
+            a.navbar-brand(href='/') Cerrar sesión
+    nav.navbar.mb-4.navbar-custom2
+        .derecha
+            a.navbar-brand2.active2(href='/admin_salesman/sales') Mostrar ventas
+            a.navbar-brand2(href='/admin_salesman/sales/add') Agregar venta
     #centerInd
         h1=title 
     br
-    #spreadLess
-        a(href='/admin_salesman') Regresar
-        br
-        a(href='/admin_salesman/sales/add') Agregar venta
     br
     #table
-        table.table 
+        table.table.table-hover
             thead 
                 tr 
                     th ID Venta

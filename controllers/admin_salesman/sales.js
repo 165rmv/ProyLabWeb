@@ -1,4 +1,6 @@
 let Ventas = require('../../models/sales')
+let Inventario = require('../../models/inventario')
+let Usuarios = require('../../models/usuarios')
 
 exports.sales_list = (req, res) =>{
     Ventas.all()
@@ -20,4 +22,11 @@ exports.details_sale = (req, res) => {
             });
         });
     });
+}
+
+exports.salesman_list = (req, res) => {
+    Usuarios.allSalesman()
+    .then((data) => {
+        res.render('admin_salesman/sales/add', {title: 'Agregar una venta', data: data})
+    })
 }

@@ -2,7 +2,10 @@ doctype html
 html
   head
     title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
-    block externalcss
+    style 
+      include ../node_modules/bootstrap/dist/css/bootstrap.min.css
+      include ../public/stylesheets/style.css
+    script 
+      include ../node_modules/bootstrap/dist/js/bootstrap.min.js
   body
     block content

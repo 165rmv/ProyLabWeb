@@ -12,6 +12,9 @@ var workerIndex = require('./routes/admin_salesman/index');
 var workerInventory = require('./routes/admin_salesman/inventory');
 var workerSales = require('./routes/admin_salesman/sales');
 
+// APIs
+var inventarioAPIRouter = require('./routes/api/inventario');
+
 
 var app = express();
 
@@ -31,6 +34,10 @@ app.use('/shops', shopsRouter);
 app.use('/admin_salesman', workerIndex);
 app.use('/admin_salesman/inventory', workerInventory);
 app.use('/admin_salesman/sales', workerSales);
+
+// APIs
+app.use('/api/inventario', inventarioAPIRouter);
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

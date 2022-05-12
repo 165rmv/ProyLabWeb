@@ -1,13 +1,27 @@
 extends ../../layout
 
 block content 
+    nav.navbar.mb-4.navbar-custom
+        .derecha
+            a.navbar-brand(href='/admin_salesman/inventory') Inventario
+            a.navbar-brand.active(href='/admin_salesman/sales') Ventas
+            a.navbar-brand(href='/admin_salesman/sales') Usuarios
+        .izquierda 
+            a.navbar-brand(href='/') Cerrar sesión
+    nav.navbar.mb-4.navbar-custom2
+        .derecha
+            a.navbar-brand2.active2(href='/admin_salesman/sales') Mostrar ventas
+            a.navbar-brand2(href='/admin_salesman/sales/add') Agregar venta
+    br
+    br
+
     #centerInd
         h1='Detalles para la venta '+idTicket
         br
         h2='Vendedor quien registró la venta: '+vendor[0].nombre
     br
     #table
-        table.table 
+        table.table.table-hover
             thead 
                 tr 
                     th Nombre
@@ -23,5 +37,7 @@ block content
     br
     #centerInd
         h2='Día, fecha y hora en la que se realizó la venta: '+timeStamp[0].created_at
-        a(href='/admin_salesman/sales') Regresar
+        br
+
+        a.btn.btn-primary(href='/admin_salesman/sales') Regresar
 

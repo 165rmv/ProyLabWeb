@@ -33,7 +33,7 @@ exports.inventory_create_post = function(req, res){
         .then((data2) =>{
             res.redirect('/admin_salesman/inventory')
         });
-      });
+    });
 }
 
 exports.inventory_update_get = function(req, res){

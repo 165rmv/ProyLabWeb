@@ -1,34 +1,39 @@
-extends ../../layout 
+extends ../../layout
+
 
 block content
-    h1 Agregar venta nueva 
+    nav.navbar.mb-4.navbar-custom
+        .derecha
+            a.navbar-brand(href='/admin_salesman/inventory') Inventario
+            a.navbar-brand.active(href='/admin_salesman/sales') Ventas
+            a.navbar-brand(href='/admin_salesman/sales') Usuarios
+        .izquierda 
+            a.navbar-brand(href='/') Cerrar sesión
+    nav.navbar.mb-4.navbar-custom2
+        .derecha
+            a.navbar-brand2(href='/admin_salesman/sales') Mostrar ventas
+            a.navbar-brand2.active2(href='/admin_salesman/sales/add') Agregar venta
+    #centerInd
+        h1=title
+        br
     br
-    a(href='/admin_salesman/sales') Regresar
-    br
-    //    
-        form(action='/bicicletas/create' method='POST')
-            table.table 
-                tr 
-                    td
-                        label(for='color') Color:
-                    td
-                        input#color(type='text' name='color')
-                tr 
-                    td
-                        label(for='modelo') Modelo:
-                    td
-                        input#modelo(type='text' name='modelo')
-                tr 
-                    td
-                        label(for='lat') Lat:
-                    td
-                        input#lat(type='text' maxlength='9' name='lat')
-                tr 
-                    td
-                        label(for='lon') Lon:
-                    td
-                        input#lon(type='text' maxlength='10' name='lon')
-                tr
-                    td 
-                    td
-                        input.btn(type='submit' value='ADD')
+    form(action='/admin_salesman/inventory/add' method='POST')
+        #table
+            table.table.table-hover
+                    tr 
+                        td
+                            label(for='nombre') Id del inventario:
+                        td
+                            input.form-control(type='number' name='id')
+                    tr
+                        td
+                            label(for='vendedor') Vendedor:
+                        td
+                            select.form-select.text-center(name="selectUsuarios")
+                                each dt in data
+                                    option(value=dt.id)=dt.nombre
+                    tr
+                        td 
+                        td
+                            input.btn.btn-success(type='submit' value='Agregar venta')
+                    

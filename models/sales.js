@@ -11,6 +11,10 @@ exports.all = () =>{
     return temp1
 }
 
+exports.allSales = () => {
+    return knex.select('*').from('ventas')
+}
+
 exports.list_products_sold = (id_ticket) =>{
     return knex.select(knex.raw('p.nombre, p.precio, p.tipo'))
             .from(knex.raw('ventas as v'))
@@ -29,4 +33,9 @@ exports.time_stamp = (id_ticket) =>{
     return knex.select('created_at')
             .from('tickets')
             .where({id: id_ticket})
+}
+
+exports.insertSale = (id_ticket, id_producto) => {
+    return knex('ventas')
+    .insert({id_ticket: id_ticket, id_producto: id_producto});
 }

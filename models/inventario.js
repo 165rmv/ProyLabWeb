@@ -1,5 +1,6 @@
 const knex = require('../database/connection');
 let alert = require('alert');
+const { type } = require('express/lib/response');
 
 exports.allInventory = () =>{
     return knex.select(knex.raw('inventario.id, inventario.id_producto, inventario.cantidad, inventario.talla, productos.nombre, productos.tipo, productos.genero, productos.precio')).from('inventario').join('productos', {'productos.id': 'inventario.id_producto'});
@@ -73,3 +74,8 @@ exports.deleteProducto = (id) => {
     return knex('productos').where({id: idInt}).del();
 }
 
+exports.getProductPriceFromIdInventory = (id) => {
+    idInt = parseInt(id)
+
+    return knex.select(knex.raw('inventario.id, productos.precio')).from('inventario').join('productos', {'productos.id': 'inventario.id_producto'}).where({'inventario.id':idInt}).first();
+}
