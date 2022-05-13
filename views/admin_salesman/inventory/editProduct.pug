@@ -7,7 +7,7 @@ block content
             a.navbar-brand(href='/admin_salesman/sales') Ventas
             a.navbar-brand(href='/admin_salesman/sales') Usuarios
         .izquierda 
-            a.navbar-brand(href='/') Cerrar sesión
+            a.navbar-brand(href='/login') Cerrar sesión
     nav.navbar.mb-4.navbar-custom2
         .derecha
             a.navbar-brand2(href='/admin_salesman/inventory') Mostrar inventario
@@ -27,27 +27,27 @@ block content
                     td
                         label(for='nombre') Nombre:
                     td
-                        input#nombre(type='text' name='nombre' value=data.nombre)
+                        input#nombre.form-control(type='text' name='nombre' value=data.nombre)
                 tr
                     td
                         label(for='precio') Precio (MXN):
                     td
-                        input#precio(type='text' maxlength='9' name='precio', value=data.precio)
+                        input#precio.form-control(type='text' maxlength='9' name='precio', value=data.precio)
                 tr 
                     td
                         label(for='tipo') Tipo de prenda:
                     td
-                        input#tipo(type='text' name='tipo' value=data.tipo)
+                        input#tipo.form-control(type='text' name='tipo' value=data.tipo)
                 tr  
                     td
                         label(for='genero') Genero (H / M):
                     td
-                        input#genero(type='text' maxlength='10' name='genero', value=data.genero)
+                        input#genero.form-control(type='text' maxlength='10' name='genero', value=data.genero)
                 tr 
                     td
                         label(for='descripcion') Descripcion:
                     td
-                        textarea#descripcion(name="descripcion", cols="30", rows="10")=data.descripcion
+                        textarea#descripcion.form-control(name="descripcion", cols="30", rows="10")=data.descripcion
                 tr
                     td 
                     td

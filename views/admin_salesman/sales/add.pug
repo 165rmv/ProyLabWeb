@@ -8,7 +8,7 @@ block content
             a.navbar-brand.active(href='/admin_salesman/sales') Ventas
             a.navbar-brand(href='/admin_salesman/sales') Usuarios
         .izquierda 
-            a.navbar-brand(href='/') Cerrar sesión
+            a.navbar-brand(href='/login') Cerrar sesión
     nav.navbar.mb-4.navbar-custom2
         .derecha
             a.navbar-brand2(href='/admin_salesman/sales') Mostrar ventas
@@ -17,7 +17,7 @@ block content
         h1=title
         br
     br
-    form(action='/admin_salesman/inventory/add' method='POST')
+    form(action='/admin_salesman/sales/add' method='POST')
         #table
             table.table.table-hover
                     tr 
@@ -29,7 +29,7 @@ block content
                         td
                             label(for='vendedor') Vendedor:
                         td
-                            select.form-select.text-center(name="selectUsuarios")
+                            select.form-select.text-center(name="selectUsuarios" id="selectUsuarios")
                                 each dt in data
                                     option(value=dt.id)=dt.nombre
                     tr

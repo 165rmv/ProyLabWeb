@@ -49,7 +49,7 @@ describe('Pruebas de MochaJS', () => {
             }).then(done, done);
         });
     });
-    /*
+    
     describe('Inventario.insertProducts e Inventario.insertInventory', () => {
         it('Se agrega un producto nuevo a la tabla de "productos" e "inventario"', (done) => {
             Inventario.insertProducts({ nombre: "Playera rosa", tipo: "Playera", genero: "Unisex", precio: 450.00, descripcion: "Playera facherita"})
@@ -163,12 +163,13 @@ describe('Pruebas de MochaJS', () => {
                 expect(parseFloat(data.precio)).to.equal(200);
             }).then(done, done);
         });
-    });*/
+    });
     
     describe('Tickets.getProductPriceFromIdInventory_multiple', () => {
-        it('Se realiza la venta, agregando a la tabla "tickets" y a la tabla "ventas"', (done) =>{
+        it('Se realiza una venta con una lista de ids del inventario, agregando a la tabla "tickets" y a la tabla "ventas"', (done) =>{
             let total = 0.00;
             let lista = [2, 2, 2, 2];
+
             Tickets.insertTicket(0.00, 2)
             .then((data) => {
                 Tickets.getLastTicket()
@@ -205,6 +206,88 @@ describe('Pruebas de MochaJS', () => {
         });
     });
 
+    describe('Inventario.findByIdInInventory', () => {
+        it('Se actualiza la cantidad de productos disponibles dentro del inventario', (done) =>{
+            //let lista = [2, 2, 2, 2];
+            let product_id = 1
+            Inventario.findByIdInInventory(product_id)
+            .then((data) => {
+                if (data == null) {
+                    // Regresa el error 404
+                    res.status(404).send('Not found');
+                    return;
+                }
+                let updateDataInventario = {
+                    id_producto: data.id_producto,
+                    cantidad: data.cantidad-1,
+                    talla: data.talla
+                }
+                Inventario.updateInventario(product_id, updateDataInventario)
+                .then((data2) => {
+                    Inventario.findByIdInInventory(product_id)
+                    .then((data3) => {
+                        expect(data3.cantidad).to.equal(5)
+                        expect(data3.id_producto).to.equal(product_id)
+                    }).then(done, done);
+                });
+            });
+            done();
+        });
+    });
+
+    describe('Inventario.updateInventario, Tickets.insertTicket y Ventas.insertSale', () => {
+        it('Se realiza una venta actualizando el inventario, los tickets y las ventas', (done) =>{
+            //let lista = [2, 2, 2, 2];
+            let inventory_id = 1;
+            let user_id = 3;
+            Inventario.findByIdInInventory(inventory_id)
+            .then((data) => {
+                if (data == null) {
+                    // Regresa el error 404
+                    res.status(404).send('Not found');
+                    return;
+                }
+                let updateDataInventario = {
+                    id_producto: data.id_producto,
+                    cantidad: data.cantidad-1,
+                    talla: data.talla
+                }
+
+                Inventario.updateInventario(inventory_id, updateDataInventario)
+                .then((data2) => {
+                    Ventas.allSales()
+                    .then((quantitySales) => {
+                        Inventario.findByIdInProducts(data.id_producto)
+                        .then((data3) => {
+                            Tickets.insertTicket(data3.precio, user_id)
+                            .then((data4) => {
+                                Tickets.getLastTicket()
+                                .then((data5) => {
+                                    Ventas.insertSale(data5.id, data.id_producto)
+                                    .then((data6) =>{
+                                        Ventas.allSales()
+                                        .then((data7) => {
+                                            Inventario.findByIdInInventory(inventory_id)
+                                            .then((data8) => {
+                                                expect(data8.cantidad).to.equal(5)
+                                                expect(data5.id).to.equal(7)
+                                                expect(data5.total).to.equal(data3.precio)
+                                                expect(data7.length).to.equal(quantitySales.length+1)
+
+                                            });
+                                        });
+                                    });
+                                });
+                            });
+                        });
+                    });
+                })
+            });
+            done();
+        });
+    });
+
+    /*
     describe('Tickets.getFinalPriceFromProductList', () => {
         it('Se obtienen varios precios de productos de la tabla inventario y se suman', (done) =>{
             let numbers = [1, 2, 2, 2, 3, 4, 5, 8, 7, 5, 9].sort();
@@ -221,7 +304,7 @@ describe('Pruebas de MochaJS', () => {
             console.log(counterSpecimens[1]);
             done();
         });
-    });
+    });*/
     /*
     describe('Tickets.getFinalPriceFromProductList', () => {
         it('Se obtienen varios precios de productos de la tabla inventario y se suman', (done) =>{

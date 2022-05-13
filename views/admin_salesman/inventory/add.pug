@@ -7,7 +7,7 @@ block content
             a.navbar-brand(href='/admin_salesman/sales') Ventas
             a.navbar-brand(href='/admin_salesman/sales') Usuarios
         .izquierda 
-            a.navbar-brand(href='/') Cerrar sesión
+            a.navbar-brand(href='/login') Cerrar sesión
     nav.navbar.mb-4.navbar-custom2
         .derecha
             a.navbar-brand2(href='/admin_salesman/inventory') Mostrar inventario
@@ -24,40 +24,40 @@ block content
                     td
                         label(for='nombre') Nombre:
                     td
-                        input#nombre(type='text' name='nombre')
+                        input#nombre.form-control(type='text' name='nombre')
                 tr 
                     td
                         label(for='tipo') Tipo de prenda:
                     td
-                        input#tipo(type='text' name='tipo')
+                        input#tipo.form-control(type='text' name='tipo')
                 tr 
                     td
                         label(for='talla') Talla ( o XCH, CH, M, G, XG):
                     td
-                        input#talla(type='text' maxlength='10' name='talla')
+                        input#talla.form-control(type='text' maxlength='10' name='talla')
                 tr 
                     td
                         label(for='genero') Genero (H / M):
                     td
-                        input#genero(type='text' maxlength='10' name='genero')
+                        input#genero.form-control(type='text' maxlength='10' name='genero')
                 tr
                 
                     td
                         label(for='precio') Precio (MXN):
                     td
-                        input#precio(type='text' maxlength='9' name='precio')
+                        input#precio.form-control(type='text' maxlength='9' name='precio')
                 tr
 
                     td
                         label(for='cantidad') Cantidad de prendas:
                     td
-                        input#cantidad(type='text' maxlength='9' name='cantidad')
+                        input#cantidad.form-control(type='text' maxlength='9' name='cantidad')
                 tr
                 
                     td
                         label(for='descripcion') Descripcion:
                     td
-                        textarea#descripcion(name="descripcion", cols="30", rows="10")
+                        textarea#descripcion.form-control(name="descripcion", cols="30", rows="10")
                 tr
                     td 
                     td

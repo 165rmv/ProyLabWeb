@@ -34,6 +34,7 @@ table th{
 
 table td{
   font-size: 20px;
+  vertical-align: middle;
 }
 
 td a{
@@ -43,7 +44,7 @@ td a{
 }
 
 
-#centerInd{
+#centerInd, #centerInd2{
   font-size: 18px;
   display: flex;
   justify-content:center;
@@ -51,6 +52,11 @@ td a{
   flex-direction: column;
   color: #5F53CF;
   letter-spacing: 2px;
+}
+
+#centerInd2{
+  margin-top: 100px;
+  margin-bottom: 30px;
 }
 
 #centerInd h2{
@@ -64,6 +70,11 @@ td a{
   text-decoration: none;
   display: flex;
   justify-content: space-around;
+}
+
+.form-label2{
+  font-size: 20px;
+  margin-right: 0px !important;
 }
 
 #spreadLess, #spreadLess2{
@@ -95,10 +106,20 @@ td a{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  padding: 40px;
+  padding-top: 0px;
+  background-color: rgb(207, 207, 207);
+  border-radius: 5px;
 }
 
 #genLog1 label{
   margin-right: 15px;
+  margin-bottom: 10px;
+  margin-top: 20px;
+}
+
+#genLog1 button{
+  margin-top: 15px;
 }
 
 a{
