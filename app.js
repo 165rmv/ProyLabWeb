@@ -11,6 +11,7 @@ var shopsRouter = require('./routes/shops');
 var workerIndex = require('./routes/admin_salesman/index');
 var workerInventory = require('./routes/admin_salesman/inventory');
 var workerSales = require('./routes/admin_salesman/sales');
+var clientsRouter = require('./routes/clientes/index');
 
 // APIs
 var inventarioAPIRouter = require('./routes/api/inventario');
@@ -34,6 +35,7 @@ app.use('/shops', shopsRouter);
 app.use('/admin_salesman', workerIndex);
 app.use('/admin_salesman/inventory', workerInventory);
 app.use('/admin_salesman/sales', workerSales);
+app.use('/clientes', clientsRouter);
 
 // APIs
 app.use('/api/inventario', inventarioAPIRouter);

@@ -52,7 +52,7 @@ exports.makeASale = (req, res) => {
         }
         Inventario.updateInventario(id_inventario, updateDataInventario)
         .then((data2) => {
-            Ventas.allSales()
+            Ventas.all()
             .then((sales) => {
                 Inventario.findByIdInProducts(data[0].id_producto)
                 .then((data3) => {
@@ -62,7 +62,6 @@ exports.makeASale = (req, res) => {
                         .then((data5) => {
                             Ventas.insertSale(data5.id, data[0].id_producto)
                             .then((data6) =>{
-                                console.log("hecho");
                                 res.render('admin_salesman/sales', {title: 'Ventas', data: sales})
                             });
                         });

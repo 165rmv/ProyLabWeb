@@ -32,6 +32,17 @@ exports.findByIdInInventory = (idInventory) =>{
     }
 }
 
+exports.findByIdInInventoryndProducts = (idInventory) =>{
+    idP = parseInt(idInventory)
+    let product = knex.select(knex.raw('inventario.id, inventario.id_producto, inventario.cantidad, inventario.talla, productos.nombre, productos.tipo, productos.genero, productos.precio')).from('inventario').join('productos', {'productos.id': 'inventario.id_producto'}).where({'inventario.id_producto': idP});
+    if(product){
+        return product
+    }
+    else{
+        throw new Error(`No existe un producto con el id: ${idProduct}`)
+    }
+}
+
 
 exports.insertProducts = (product) => {
     return knex('productos')

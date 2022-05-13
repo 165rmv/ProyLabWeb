@@ -42,7 +42,7 @@ exports.inventory_update_get = function(req, res){
         console.log(data[0].id_producto)
         Inventario.findByIdInProducts(data[0].id_producto)
         .then((data2) => {
-            res.render('admin_salesman/inventory/edit', {title: 'Editar producto', data: data[0], data2: data2});
+            res.render('admin_salesman/inventory/edit', {title: 'Editar producto del inventario', data: data[0], data2: data2});
         })
         
     });

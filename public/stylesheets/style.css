@@ -139,13 +139,13 @@ a{
   text-align: center;
 }
 
-.navbar-custom{
+.navbar-custom, .navbar-custom3{
   background-color: #5F53CF;
   display: flex;
   justify-content:space-between;
   padding-left: 35px;
-  padding-top: 20px;
-  padding-bottom: 20px;
+  padding-top: 5px;
+  padding-bottom: 10px;
   margin-bottom: 0px !important;
 }
 
@@ -158,12 +158,27 @@ a{
   padding-bottom: 10px;
 }
 
+.navbar-custom3{
+  justify-content: left;
+}
+
+.navbar-custom3 a{
+  font-size: 20px !important;
+}
+
+.navbar-custom img{
+  margin-right: 20px;
+  width: 60px;
+  background-color: #5e2191;
+  border-radius: 10px;
+}
+
 .navbar-brand{
   padding-left: 23px;
   padding-right: 23px;
   border-radius: 5px;
-  padding-top: 15px;
-  padding-bottom: 15px;
+  padding-top: 10px;
+  padding-bottom: 10px;
   transition-duration: 0.4s;
 }
 
@@ -178,6 +193,8 @@ a{
   text-decoration: none;
   transition-duration: 0.4s;
 }
+
+
 
 .btn-primary{
   background-color: #5F53CF;
@@ -208,4 +225,114 @@ a{
 form{
   display: flex;
   justify-content: center;
+}
+
+.parts{
+  margin-left: 50px;
+  margin-right: 50px;
+}
+
+
+
+
+
+.part1{
+  display: flex;
+  justify-content: space-around;
+  align-content: center;
+  padding-top: 20px;
+  padding-bottom: 20px;
+  background-color: #eeeeee;
+  height: 500px;
+  width: 100%;
+}
+
+.part1 .img1, .part1 .img2, .part1 .img3, .part1 .img4{
+  margin-left: 25px;
+  
+  width: 25%;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.part1 .img4{
+  margin-right: 25px;
+}
+
+.part1 img{
+  width: 300px;
+  height: 100%;
+}
+
+.lne{
+  height: 10px;
+  
+  background-color: #4653e2;
+}
+
+.datosProducto h2{
+  font-size: 22px;
+}
+
+.datosProducto label{
+  font-size: 18px;
+}
+
+.datosProducto{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-content: center;
+  margin-left: 20px;
+}
+
+.datosProducto .aButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.datosProducto a{
+  width: 100px;
+  margin-top: 30px;
+}
+
+.allProductDetail{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product{
+  margin-top: 30px;
+  margin-bottom: 30px;
+  display: flex;
+  justify-content: center;
+}
+
+.datosProducto2{
+  display: flex;
+  justify-content:space-evenly;
+  flex-direction: column;
+  align-content: center;
+  margin-left: 20px;
+}
+
+.datosProducto2 .desc h2{
+  font-size: 45px;
+}
+
+.datosProducto2 .desc label, .datosProducto2 .precio label, .datosProducto2 .tallas label, .datosProducto2 .tallas .listado label{
+  font-size: 25px;
+}
+
+.datosProducto2 .tallas .listado label{
+  background-color: #7a70cf;
+  padding: 7px;
+  margin-right: 10px;
+  margin-top: 10px;
+  color: #fff;
+  border-radius: 5px;
 }

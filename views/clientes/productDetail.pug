@@ -1,0 +1,35 @@
+extends ../layout 
+
+block content
+    nav.navbar.mb-4.navbar-custom
+        .derecha
+            a(href='/clientes')
+                img(src='../../../assets/logoC.png')
+            a.navbar-brand(href='/clientes') Inicio
+            a.navbar-brand(href='/clientes/ropa-hombre') Hombre
+            a.navbar-brand(href='/clientes/ropa-mujer') Mujer
+            a.navbar-brand(href='/clientes/visit-us') Visítanos
+            a.navbar-brand(href='/clientes/about-us') Quiénes somos
+        .izquierda 
+            a.navbar-brand(href='/login') Iniciar sesión
+    br
+    br
+    #centerInd
+        h1=title
+    .allProductDetail
+        .product 
+            img(src='../../../assets/productMen/square400x400.png')
+            .datosProducto2 
+                .desc
+                    h2='Descripción:'
+                    br
+                    label(for='descripcion')=dataProduct.descripcion
+                .precio 
+                    label(for='precio')='Precio: $'+dataProduct.precio+' MXN.'
+                .tallas
+                    label(for='precio')='Tallas disponibles en tienda:'
+                    .listado
+                        each dt in dataInventario 
+                            label(for='talla')=dt.talla
+
+        a.btn.btn-primary.mt-4(href='javascript: history.go(-1)') Regresar

@@ -1,0 +1,35 @@
+extends ../layout 
+
+block content
+    nav.navbar.mb-4.navbar-custom
+        .derecha
+            a(href='/clientes')
+                img(src='./assets/logoC.png')
+            a.navbar-brand(href='/clientes') Inicio
+            a.navbar-brand(href='/clientes/ropa-hombre') Hombre
+            a.navbar-brand(href='/clientes/ropa-mujer') Mujer
+            a.navbar-brand(href='/clientes/visit-us') Visítanos
+            a.navbar-brand(href='/clientes/about-us') Quiénes somos
+        .izquierda 
+            a.navbar-brand(href='/login') Iniciar sesión
+    //br
+    //br
+
+    //#centerInd
+        h1=title
+    
+    //br
+    //br
+    .part1
+        .img1
+            img(src='../assets/index/ph1.jpg')
+        .img2 
+            img(src="../assets/index/ph2.jpg", alt="img2") 
+        .img3
+            img(src="../assets/index/ph3.jpg", alt="img3") 
+        .img4
+            img(src="../assets/index/ph4.jpg", alt="img3") 
+    
+    .lne
+
+    .part2 
