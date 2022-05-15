@@ -1,0 +1,70 @@
+extends ../../layout 
+
+block content
+    nav.navbar.mb-4.navbar-custom
+        .derecha
+            img(src='../../assets/logoC.png')
+            a.navbar-brand(href='/admin_salesman/inventory') Inventario
+            a.navbar-brand(href='/admin_salesman/sales') Ventas
+            a.navbar-brand.active(href='/admin_salesman/users') Usuarios
+        .izquierda 
+            a.navbar-brand(href='/login') Cerrar sesión
+    nav.navbar.mb-4.navbar-custom2
+        .derecha
+            a.navbar-brand2(href='/admin_salesman/users') Administrar usuarios
+            a.navbar-brand2.active2(href='/admin_salesman/users/add') Crear usuario
+    //
+        - if (errors.length > 0)
+            .alert.alert-danger
+                label(for='error') Se han encontrado los siguientes errores:
+                ul
+                    each dt in errors 
+                        li 
+                            label(for='error')="["+dt.param+"]: "+dt.msg
+    #centerInd
+        h1=title 
+    br
+    br
+
+    
+
+    form(action='/admin_salesman/users/add' method='POST')
+        #table
+            table.table.table-hover
+                    tr 
+                        td
+                            label(for='inputNombre') Nombre:
+                        td
+                            input.form-control(type='text' name='nombre' id='nombre')
+                    tr 
+                        td
+                            label(for='inputApellido') Apellido:
+                        td
+                            input.form-control(type='text' name='apellido')
+                    tr 
+                        td
+                            label(for='inputMail') Correo electronico:
+                        td
+                            input.form-control(type='text' name='mail')
+                    tr 
+                        td
+                            label(for='selectRol') Rol:
+                        td
+                            select.form-select.text-center(name="rol" id="rol")
+                                option(value='cajero')='Cajero'
+                                option(value='gerente')='Gerente'
+                                option(value='duenio')='Dueño'
+                    tr 
+                        td
+                            label(for='inputPassword') Contraseña:
+                        td
+                            input.form-control(type='password' name='password')
+                    tr 
+                        td
+                            label(for='inputConfirmPassword') Confirma la contraseña:
+                        td
+                            input.form-control(type='password' name='confirm_password')
+                    tr
+                        td 
+                        td
+                            input.btn.btn-success(type='submit' value='Agregar usuario')

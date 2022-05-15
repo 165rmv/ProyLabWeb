@@ -63,10 +63,10 @@ td a{
   margin-bottom: 30px;
 }
 
-#spreadInd, #aLog{
-  margin-top: 100px;
+#aLog{
+  margin-top: 70px;
   font-size: 25px;
-  color: #fff !important;
+  color: rgb(80, 71, 243) !important;
   text-decoration: none;
   display: flex;
   justify-content: space-around;
@@ -230,6 +230,10 @@ form{
 .parts{
   margin-left: 50px;
   margin-right: 50px;
+}
+
+.alert-danger{
+  margin-top: -25px;
 }
 
 

@@ -8,9 +8,11 @@ exports.seed = async function(knex) {
   await knex('ventas').del();
 
   await knex('usuarios').insert([
-    {nombre: 'Pedro', apellido: 'Ramirez', rol: 'cajero', id_fb: 't7fUYt2f2yt3hjg271kU9Y0HG2j'},
-    {nombre: 'Fernanda', apellido: 'Gutierrez', rol: 'gerente', id_fb: 'DhjyD2Blu44L78i09npI3hlñOUv'},
-    {nombre: 'Alejandro', apellido: 'Martinez', rol: 'cajero', id_fb: 'dGRE27vbHYr9bE0vERfVRT83hWklu'}
+    {nombre: 'Empleado Antiguo', apellido: '', rol: 'noTocar', email: 'noTocar', password: 'noTocar'},
+    {nombre: 'Pedro', apellido: 'Ramirez', rol: 'cajero', email: 'pedrito_16@gmail.com', password: '50hellmanns'},
+    {nombre: 'Fernanda', apellido: 'Gutierrez', rol: 'gerente', email: 'estrellita.guti@gmail.com', password: 'perritosb0n1t0s'},
+    {nombre: 'Alejandro', apellido: 'Martinez', rol: 'cajero', email: 'ale_martinez@gmail.com', password: 'Pepsiman93'},
+    {nombre: 'Valeria', apellido: 'Fuente', rol: 'duenio', email: 'val_fuente@gmail.com', password: 'v4lFuente'}
   ]);
   await knex('productos').insert([
     {nombre: 'cara_feliz', tipo: 'playera', genero: 'M', precio: 250.00, descripcion: 'Playera amarilla con una cara feliz.'},
@@ -41,12 +43,12 @@ exports.seed = async function(knex) {
     {id_producto: 6, cantidad: 6, talla: 'G'},
   ]);
   await knex('tickets').insert([
-    {total: 250.00, id_usuario: 1},
-    {total: 450.00, id_usuario: 3},
-    {total: 299.99, id_usuario: 3},
-    {total: 410.15, id_usuario: 1},
-    {total: 250.00, id_usuario: 3},
-    {total: 250.00, id_usuario: 1},
+    {total: 250.00, id_usuario: 2},
+    {total: 450.00, id_usuario: 4},
+    {total: 299.99, id_usuario: 4},
+    {total: 410.15, id_usuario: 2},
+    {total: 250.00, id_usuario: 4},
+    {total: 250.00, id_usuario: 2},
   ]);
   await knex('ventas').insert([
     {id_ticket: 1, id_producto: 1},

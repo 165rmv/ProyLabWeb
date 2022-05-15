@@ -2,7 +2,11 @@ var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
+//let session = require('express-session');
+//let flash = require('express-flash');
+//let sessionStore = new session.MemoryStore;
 var logger = require('morgan');
+let appConfig = require('./configs/app');
 
 
 var indexRouter = require('./routes/index');
@@ -12,6 +16,7 @@ var workerIndex = require('./routes/admin_salesman/index');
 var workerInventory = require('./routes/admin_salesman/inventory');
 var workerSales = require('./routes/admin_salesman/sales');
 var clientsRouter = require('./routes/clientes/index');
+var usersRouter = require('./routes/admin_salesman/usuarios');
 
 // APIs
 var inventarioAPIRouter = require('./routes/api/inventario');
@@ -27,6 +32,15 @@ app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
+/*
+app.use(session({
+  cookie: { maxAge: 60000 },
+  store: sessionStore,
+  saveUninitialized: true,
+  resave: 'true',
+  secret: appConfig.secret
+}));
+app.use(flash());*/
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
@@ -36,6 +50,7 @@ app.use('/admin_salesman', workerIndex);
 app.use('/admin_salesman/inventory', workerInventory);
 app.use('/admin_salesman/sales', workerSales);
 app.use('/clientes', clientsRouter);
+app.use('/admin_salesman/users', usersRouter);
 
 // APIs
 app.use('/api/inventario', inventarioAPIRouter);

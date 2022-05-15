@@ -23,7 +23,18 @@ exports.getTicketById = (id) => {
         return ticket
     }
     else{
-        throw new Error(`No existe un producto con el id: ${id}`)
+        throw new Error(`No existe un ticket con el id: ${id}`)
+    }
+}
+
+exports.getTicketsByUserId = (userId) => {
+    uId = parseInt(userId);
+    let ticket = knex.select('*').from('tickets').where({'id_usuario': uId});
+    if(ticket){
+        return ticket
+    }
+    else{
+        throw new Error(`No existen tickets con el id: ${userId}`)
     }
 }
 

@@ -38,6 +38,8 @@ exports.makeASale = (req, res) => {
     let id_usuario = req.body.selectUsuarios;
     let id_inventario = req.body.id;
 
+    console.log(`id Inventario: ${id_inventario}`)
+
     Inventario.findByIdInInventory(id_inventario)
     .then((data) => {
         if (data == null) {

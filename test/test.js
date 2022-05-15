@@ -3,7 +3,9 @@ var assert = require('assert');
 
 let Inventario = require('../models/inventario');
 let Tickets = require('../models/tickets');
-let Ventas = require('../models/sales')
+let Ventas = require('../models/sales');
+let Usuarios = require('../models/usuarios');
+const bcrypt = require('bcryptjs')
 
 const knex = require('../database/connection');
 var chai = require('chai');
@@ -121,7 +123,7 @@ describe('Pruebas de MochaJS', () => {
 
     describe('Tickets.insertTicket', () => {
         it('Se agrega un ticket a la tabla "Tickets"', (done) =>{
-            Tickets.insertTicket(0.00, 1)
+            Tickets.insertTicket(0.00, 2)
             .then((data) => {
                 Tickets.allTickets()
                 .then((data2) => {
@@ -193,13 +195,13 @@ describe('Pruebas de MochaJS', () => {
             }).then(done, done);
         });
     });*/
-    
+    /*
     describe('Tickets.getProductPriceFromIdInventory_multiple', () => {
         it('Se realiza una venta con una lista de ids del inventario, agregando a la tabla "tickets" y a la tabla "ventas"', (done) =>{
             let total = 0.00;
             let lista = [2, 2, 2, 2];
 
-            Tickets.insertTicket(0.00, 2)
+            Tickets.insertTicket(0.00, 3)
             .then((data) => {
                 Tickets.getLastTicket()
                 .then((data2) => {
@@ -220,7 +222,7 @@ describe('Pruebas de MochaJS', () => {
                                                 .then((data8) => {
                                                     expect(data2.id).to.equal(data7.id);
                                                     expect(parseFloat(data7.total)).to.equal(1000);
-                                                    expect(parseFloat(data7.id_usuario)).to.equal(2);
+                                                    expect(parseFloat(data7.id_usuario)).to.equal(3);
                                                     expect(data8.length).to.equal(data3.length+lista.length);
                                                 }).then(done, done);
                                             });
@@ -233,7 +235,7 @@ describe('Pruebas de MochaJS', () => {
                 });
             });
         });
-    });
+    });*/
 
     describe('Inventario.updateInventario, Tickets.insertTicket y Ventas.insertSale', () => {
         it('Se realiza una venta actualizando el inventario, los tickets y las ventas', (done) =>{
@@ -283,6 +285,57 @@ describe('Pruebas de MochaJS', () => {
                     });
                 })
             });
+            done();
+        });
+    });
+
+    describe('Usuarios.insertUser', () => {
+        it('Se crea y agrega un usuario nuevo', (done) => {
+            nombre = "Juanito";
+            apellido = "Banana";
+            mail = "juanito_banana@gmail.com";
+            rol = "gerente";
+            password = "banana4Life";   
+
+            password = bcrypt.hashSync(password, 10)
+
+            Usuarios.insertUser(nombre, apellido, rol, mail, password)
+            .then((data) => {
+                Usuarios.allUsers()
+                .then((data2) => {
+                    expect(data2.length).to.equal(5)
+                })
+            });
+            done();
+        });
+    });
+
+    describe('Usuarios.deleteUser', () => {
+        it('Se elimina un usuario', (done) =>{
+            Tickets.allTickets()
+            .then ((ticketList) => {
+                Tickets.getTicketsByUserId(2)
+                .then((data) => {
+                    let cont = 0
+                    for(let ticket of data){
+                        cont += 1;
+                        Tickets.updateTicket(ticket.id, {total: ticket.total, id_usuario: 1})
+                        .then((empty) => {
+                            if(cont == 3){
+                                Usuarios.deleteUser(2)
+                                .then((empty) => {
+                                    Usuarios.allUsers()
+                                    .then((listaUsuarios) => {
+                                        expect(listaUsuarios.length).to.equal(3)
+                                    })
+                                })
+                                return;
+                            }
+                        })
+                        
+                    }
+                })
+            })
             done();
         });
     });

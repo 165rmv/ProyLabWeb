@@ -1,0 +1,39 @@
+extends ../../layout 
+
+block content
+    nav.navbar.mb-4.navbar-custom
+        .derecha
+            img(src='../assets/logoC.png')
+            a.navbar-brand(href='/admin_salesman/inventory') Inventario
+            a.navbar-brand(href='/admin_salesman/sales') Ventas
+            a.navbar-brand.active(href='/admin_salesman/users') Usuarios
+        .izquierda 
+            a.navbar-brand(href='/login') Cerrar sesión
+    nav.navbar.mb-4.navbar-custom2
+        .derecha
+            a.navbar-brand2.active2(href='/admin_salesman/users') Administrar usuarios
+            a.navbar-brand2(href='/admin_salesman/users/add') Crear usuario
+    #centerInd
+        h1=title 
+    br
+    br
+    #table
+        table.table.table-hover
+            thead
+                tr 
+                    th Nombre
+                    th apellido
+                    th rol
+                    th 
+            
+            tbody 
+                each dt in data
+                    tr 
+                        td=dt.nombre 
+                        td=dt.apellido 
+                        td=dt.rol
+                        td 
+                            form.inline(method='post' action= 'users/'+ dt.id + '/delete')
+                                input(type='hidden' name='id' value= dt.id)
+                                button.link-button.btn.btn-danger(type='submit' name='submit_param' value='submit_value' class='btn')
+                                    = 'Eliminar'
