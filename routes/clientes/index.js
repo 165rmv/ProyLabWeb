@@ -20,7 +20,7 @@ router.get('/ropa-mujer', productController.women_products);
 router.get('/ropa-mujer/:id/info', productController.womenProductDetail);
 
 router.get('/visit-us', function(req, res) {
-    res.render('clientes/visitUs', {title: 'Visita nuestras sucursales'});
+    res.render('clientes/visitUs', {title: '¡Visita nuestras sucursales!'});
 });
 
 module.exports = router;

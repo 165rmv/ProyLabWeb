@@ -20,6 +20,7 @@ var usersRouter = require('./routes/admin_salesman/usuarios');
 
 // APIs
 var inventarioAPIRouter = require('./routes/api/inventario');
+var tiendasAPIRouter = require('./routes/api/tiendas');
 
 
 var app = express();
@@ -54,6 +55,7 @@ app.use('/admin_salesman/users', usersRouter);
 
 // APIs
 app.use('/api/inventario', inventarioAPIRouter);
+app.use('/api/tiendas', tiendasAPIRouter);
 
 
 // catch 404 and forward to error handler

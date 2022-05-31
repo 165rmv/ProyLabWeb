@@ -1,4 +1,16 @@
-extends ../layout 
+extends ../layout2
+
+block cssleaflet
+    link(rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==' crossorigin='')
+    script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==' crossorigin='')
+    style.
+        #map{
+        height: 500px;
+        width: 70%;
+        margin: 0 auto;
+        border: 1px solid black;
+        margin-bottom: 40px;
+        }
 
 block content
     nav.navbar.mb-4.navbar-custom
@@ -18,3 +30,7 @@ block content
         h1=title
     br
     br
+    #map
+
+    script(src='../javascripts/jquery-3.6.0.min.js')
+    script(src='../javascripts/map.js')

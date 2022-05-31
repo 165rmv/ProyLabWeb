@@ -1,5 +1,12 @@
 exports.up = async function(knex, Promise) {
     //return Promise.all([
+        await knex.schema.createTable('tiendas', (table) => {
+            table.increments('id');
+            table.string('nombre', 255).notNullable();
+            table.decimal('lat', 8, 6).notNullable();
+            table.decimal('lon', 9, 7).notNullable();
+            table.timestamps(true, true);
+        });
         await knex.schema.createTable('productos', (table) => {
             table.increments('id');
             table.string('nombre', 255).notNullable();
@@ -78,6 +85,7 @@ exports.down = async function(knex, Promise) {
         await knex.schema.dropTable('inventario'),
         await knex.schema.dropTable('carrito'),
         await knex.schema.dropTable('usuarios'),
-        await knex.schema.dropTable('productos')
+        await knex.schema.dropTable('productos'),
+        await knex.schema.dropTable('tiendas')
     //]);
 };

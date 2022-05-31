@@ -1,12 +1,18 @@
 exports.seed = async function(knex) {
   // Deletes ALL existing entries
 
+  await knex('tiendas').del();
   await knex('usuarios').del();
   await knex('productos').del();
   await knex('inventario').del();
   await knex('tickets').del();
   await knex('ventas').del();
 
+  await knex('tiendas').insert([
+    {nombre: 'Tienda 1', lat: 19.299713, lon: -99.1371403},
+    {nombre: 'Tienda 2', lat: 19.304543, lon: -99.1657200},
+    {nombre: 'Tienda 3', lat: 19.319611, lon: -99.1389991}
+  ]);
   await knex('usuarios').insert([
     {nombre: 'Empleado Antiguo', apellido: '', rol: 'noTocar', email: 'noTocar', password: 'noTocar'},
     {nombre: 'Pedro', apellido: 'Ramirez', rol: 'cajero', email: 'pedrito_16@gmail.com', password: '50hellmanns'},
