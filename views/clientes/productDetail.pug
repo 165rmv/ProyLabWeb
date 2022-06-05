@@ -1,4 +1,4 @@
-extends ../layout 
+extends ../layoutClientes
 
 block content
     nav.navbar.mb-4.navbar-custom
@@ -25,7 +25,7 @@ block content
                     br
                     label(for='descripcion')=dataProduct.descripcion
                 .precio 
-                    label(for='precio')='Precio: $'+dataProduct.precio+' MXN.'
+                    label(for='precio')='Precio: '+currSign+dataProduct.precio+' '+curr.currency+'.'
                 .tallas
                     label(for='precio')='Tallas disponibles en tienda:'
                     .listado
@@ -33,3 +33,18 @@ block content
                             label(for='talla')=dt.talla
 
         a.btn.btn-primary.mt-4(href='javascript: history.go(-1)') Regresar
+
+block select
+    .d-flex.justify-content-center
+        .d-inline-flex.p-2.align-items-center
+        | Moneda: 
+        form(method='post' action= 'info')
+            select.form-select.text-center.mx-3(name="currencySelect" id="currency" class='currency')
+                option(value='EUR' selected = selectedCur == 1)='EUR'
+                option(value='MXN' selected = selectedCur == 2)='MXN'
+                option(value='USD' selected = selectedCur == 3)='USD'
+                option(value='CLP' selected = selectedCur == 4)='CLP'
+                option(value='URY' selected = selectedCur == 5)='URY'
+            button.link-button.btn.btn-primary(type='submit' name='submit_param' value='submit_value' class='btn')
+                                        = 'Cambiar moneda'
+    

@@ -44,7 +44,8 @@ td a{
 }
 
 
-#centerInd, #centerInd2{
+#centerInd, #centerInd2, #centerInd3{
+  margin-top: 80px;
   font-size: 18px;
   display: flex;
   justify-content:center;
@@ -57,6 +58,10 @@ td a{
 #centerInd2{
   margin-top: 100px;
   margin-bottom: 30px;
+}
+
+#centerInd3{
+  margin-top: 160px;
 }
 
 #centerInd h2{
@@ -76,6 +81,8 @@ td a{
   font-size: 20px;
   margin-right: 0px !important;
 }
+
+
 
 #spreadLess, #spreadLess2{
   margin-top: 20px;
@@ -139,6 +146,13 @@ a{
   text-align: center;
 }
 
+.navbar {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
 .navbar-custom, .navbar-custom3{
   background-color: #5F53CF;
   display: flex;
@@ -153,6 +167,7 @@ a{
   background-color: #f7f7f7;
   display: flex;
   justify-content:space-between;
+  margin-top: 77px;
   padding-left: 35px;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -339,4 +354,9 @@ form{
   margin-top: 10px;
   color: #fff;
   border-radius: 5px;
+}
+
+#currency option img{
+  width: 20px;
+  height: 20px;
 }

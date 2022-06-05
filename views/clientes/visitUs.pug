@@ -1,10 +1,11 @@
-extends ../layout2
+extends ../layoutClientes2
 
 block cssleaflet
     link(rel='stylesheet' href='https://unpkg.com/leaflet@1.7.1/dist/leaflet.css' integrity='sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==' crossorigin='')
     script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==' crossorigin='')
     style.
         #map{
+        z-index: -1;
         height: 500px;
         width: 70%;
         margin: 0 auto;
@@ -13,7 +14,7 @@ block cssleaflet
         }
 
 block content
-    nav.navbar.mb-4.navbar-custom
+    nav.navbar.mb-4.navbar-custom   
         .derecha
             a(href='/clientes')
                 img(src='../assets/logoC.png')

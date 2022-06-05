@@ -1,0 +1,41 @@
+doctype html
+html
+  head
+    title= title
+    style 
+      include ../node_modules/bootstrap/dist/css/bootstrap.min.css
+      include ../public/stylesheets/style.css
+    script 
+      include ../node_modules/bootstrap/dist/js/bootstrap.min.js
+    block cssleaflet
+  body
+    block content
+    .footer.mt-4.py-3
+      .row.mt-3
+        .col-md-3.col-lg-4.col-xl-3.mx-auto.mb-4
+          // Content
+          h6.text-uppercase.fw-bold.mb-4
+            i.fas.fa-gem.me-3
+            | Aesthetic Fashion
+          p
+            | La vida es demasiado corta para llevar ropa aburrida.
+            | No vendemos ropa, vendemos estilo y calidad.
+        .col-md-4.col-lg-3.col-xl-3.mx-auto.mb-md-0.mb-4
+          // Links
+          h6.text-uppercase.fw-bold.mb-4
+            | Contacto
+          p
+            i.fas.fa-home.me-3
+            |  Nativitas, CDMX 10012, MX
+          p
+            i.fas.fa-envelope.me-3
+            |             info@example.com
+          p
+            i.fas.fa-phone.me-3
+            |  + 52 55 3645 4038
+          p
+            i.fas.fa-print.me-3
+            |  + 52 55 3645 4038
+
+      .text-center.p-4
+        h5 © 2021 Copyright:

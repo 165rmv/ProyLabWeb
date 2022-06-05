@@ -16,11 +16,11 @@ exports.seed = async function(knex) {
     {nombre: 'Tienda 3', lat: 19.319611, lon: -99.1389991}
   ]);
   await knex('usuarios').insert([
-    {nombre: 'Empleado Antiguo', apellido: '', rol: 'noTocar', email: 'noTocar', password: bcrypt.hashSync('noTocar', 10)},
-    {nombre: 'Pedro', apellido: 'Ramirez', rol: 'cajero', email: 'pedrito_16@gmail.com', password: bcrypt.hashSync('50hellmanns', 10)},
-    {nombre: 'Fernanda', apellido: 'Gutierrez', rol: 'gerente', email: 'estrellita.guti@gmail.com', password: bcrypt.hashSync('perritosb0n1t0s', 10)},
-    {nombre: 'Alejandro', apellido: 'Martinez', rol: 'cajero', email: 'ale_martinez@gmail.com', password: bcrypt.hashSync('Pepsiman93', 10)},
-    {nombre: 'Valeria', apellido: 'Fuente', rol: 'duenio', email: 'val_fuente@gmail.com', password: bcrypt.hashSync('v4lFuente', 10)}
+    {nombre: 'Empleado Antiguo', apellido: '', rol: 'noTocar', currency: 'EUR', email: 'noTocar', password: bcrypt.hashSync('noTocar', 10)},
+    {nombre: 'Pedro', apellido: 'Ramirez', rol: 'cajero', currency: 'MXN', email: 'pedrito_16@gmail.com', password: bcrypt.hashSync('50hellmanns', 10)},
+    {nombre: 'Fernanda', apellido: 'Gutierrez', rol: 'gerente', currency: 'MXN', email: 'estrellita.guti@gmail.com', password: bcrypt.hashSync('perritosb0n1t0s', 10)},
+    {nombre: 'Alejandro', apellido: 'Martinez', rol: 'cajero', currency: 'MXN', email: 'ale_martinez@gmail.com', password: bcrypt.hashSync('Pepsiman93', 10)},
+    {nombre: 'Valeria', apellido: 'Fuente', rol: 'duenio', currency: 'MXN', email: 'val_fuente@gmail.com', password: bcrypt.hashSync('v4lFuente', 10)}
   ]);
   await knex('productos').insert([
     {nombre: 'cara_feliz', tipo: 'playera', genero: 'M', precio: 250.00, descripcion: 'Playera amarilla con una cara feliz.'},

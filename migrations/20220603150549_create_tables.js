@@ -21,6 +21,7 @@ exports.up = async function(knex, Promise) {
             table.string('nombre', 255).notNullable();
             table.string('apellido', 255).notNullable();
             table.string('rol', 255).notNullable();
+            table.string('currency', 255).notNullable();
             table.string('email', 255).notNullable();
             table.string('password', 512).notNullable();
             table.timestamps(true, true);

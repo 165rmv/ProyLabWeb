@@ -13,11 +13,17 @@ router.get('/about-us', function(req, res) {
 
 router.get('/ropa-hombre', productController.men_products);
 
-router.get('/ropa-hombre/:id/info', productController.menProductDetail);
+router.post('/ropa-hombre', productController.men_productsPOST);
+
+//router.get('/ropa-hombre/:id/info', productController.menProductDetail);
 
 router.get('/ropa-mujer', productController.women_products);
 
-router.get('/ropa-mujer/:id/info', productController.womenProductDetail);
+router.post('/ropa-mujer', productController.women_productsPOST);
+
+router.get('/product-detail/:id/info', productController.productDetail);
+
+router.post('/product-detail/:id/info', productController.productDetailPOST);
 
 router.get('/visit-us', function(req, res) {
     res.render('clientes/visitUs', {title: '¡Visita nuestras sucursales!'});
