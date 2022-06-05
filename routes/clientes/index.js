@@ -15,8 +15,6 @@ router.get('/ropa-hombre', productController.men_products);
 
 router.post('/ropa-hombre', productController.men_productsPOST);
 
-//router.get('/ropa-hombre/:id/info', productController.menProductDetail);
-
 router.get('/ropa-mujer', productController.women_products);
 
 router.post('/ropa-mujer', productController.women_productsPOST);
