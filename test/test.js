@@ -303,7 +303,7 @@ describe('Pruebas de MochaJS', () => {
             .then((data) => {
                 Usuarios.allUsers()
                 .then((data2) => {
-                    expect(data2.length).to.equal(5)
+                    expect(data2.length).to.equal(6)
                 })
             });
             done();
@@ -326,13 +326,95 @@ describe('Pruebas de MochaJS', () => {
                                 .then((empty) => {
                                     Usuarios.allUsers()
                                     .then((listaUsuarios) => {
-                                        expect(listaUsuarios.length).to.equal(3)
+                                        expect(listaUsuarios.length).to.equal(4)
                                     })
                                 })
                                 return;
                             }
                         })
                         
+                    }
+                })
+            })
+            done();
+        });
+    });
+
+    describe('Usuarios.getUserByEmail', () => {
+        it('Se obtiene un usuario por su email', (done) =>{
+            Usuarios.getUserByEmail("pedrito_16@gmail.com")
+            .then((data) => {
+                //console.log(data[0]);
+                expect(data.length).to.equal(1)
+            })
+            done();
+        });
+    });
+
+    describe('Inventario.deleteProductosFromInventario', () => {
+        it('Se elimina un producto del inventario.', (done) =>{
+            Inventario.allInventory()
+            .then ((inventario) => {
+                Inventario.deleteProductosFromInventario(2)
+                .then ((data) => {
+                    Inventario.allInventory()
+                    .then ((newInventario) => {
+                        expect(inventario.length-newInventario.length).to.equal(3)
+                    })
+                })
+            })
+            done();
+        });
+    });
+
+    describe('Ventas.updateSale', () => {
+        it('Se modifican los id_product de ventas.', (done) =>{
+            Ventas.allSalesOfAProduct(2)
+            .then((data) => {
+                //console.log(data.length)
+                for(let i = 0; i < data.length; i++){
+                    //console.log(data[i])
+                    Ventas.updateSale(data[i].id, {id_ticket: data[i].id_ticket, id_producto: 1})
+                    .then((empty) =>{
+                        if(i == data.length-1){
+                            Ventas.allSalesOfAProduct(2)
+                            .then((ventas) =>{
+                                expect(ventas.length).to.equal(0)
+                            })
+                        }
+                    })
+                    
+                }
+            })
+            done();
+        });
+    });
+
+    describe('Inventario.deleteProductosFromInventario y Ventas.updateSale', () => {
+        it('Se elimina un producto de la base de datos.', (done) =>{
+            let id_producto = 2
+            Inventario.deleteProductosFromInventario(id_producto)
+            .then ((dataEmpty) => {
+                Ventas.allSalesOfAProduct(id_producto)
+                .then((data) => {
+                    for(let i = 0; i < data.length; i++){
+                        Ventas.updateSale(data[i].id, {id_ticket: data[i].id_ticket, id_producto: 1})
+                        .then((empty) =>{
+                            if(i == data.length-1){
+                                Ventas.allSalesOfAProduct(2)
+                                .then((ventas) =>{
+                                    expect(ventas.length).to.equal(0)
+                                    Inventario.deleteProducto(id_producto)
+                                    .then((dataEmpty) =>{
+                                        // Aquí se acaba
+                                        Inventario.allProducts()
+                                        .then((newProductos) => {
+                                            expect(newProductos.length).to.equal(5)
+                                        })
+                                    })
+                                })
+                            }
+                        })
                     }
                 })
             })

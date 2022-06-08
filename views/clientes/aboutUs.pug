@@ -11,11 +11,17 @@ block content
             a.navbar-brand(href='/clientes/visit-us') Visítanos
             a.navbar-brand(href='/clientes/about-us') Quiénes somos
         .izquierda 
-            a.navbar-brand(href='/login') Iniciar sesión
+            a.navbar-brand(href='/') 
     br
     br
     #centerInd
         h1=title
     br
     br
-    
+block imgLog 
+    .centerLog
+        a(href='/login')
+            img(src='../assets/logoC.png')
+
+block scIcon 
+    link(rel="shortcut icon", href="../assets/logoC.png")

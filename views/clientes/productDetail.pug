@@ -11,7 +11,7 @@ block content
             a.navbar-brand(href='/clientes/visit-us') Visítanos
             a.navbar-brand(href='/clientes/about-us') Quiénes somos
         .izquierda 
-            a.navbar-brand(href='/login') Iniciar sesión
+            a.navbar-brand(href='/') 
     br
     br
     #centerInd
@@ -47,4 +47,9 @@ block select
                 option(value='URY' selected = selectedCur == 5)='URY'
             button.link-button.btn.btn-primary(type='submit' name='submit_param' value='submit_value' class='btn')
                                         = 'Cambiar moneda'
-    
+block imgLog 
+    .centerLog
+        img(src='../../../assets/logoC.png')
+
+block scIcon 
+    link(rel="shortcut icon", href="../../../assets/logoC.png")

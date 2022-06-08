@@ -6,14 +6,26 @@ block content
             img(src='../../../../assets/logoC.png')
             a.navbar-brand.active(href='/admin_salesman/inventory') Inventario
             a.navbar-brand(href='/admin_salesman/sales') Ventas
-            a.navbar-brand(href='/admin_salesman/users') Usuarios
+            - if (userDB.rol == 'duenio')
+                a.navbar-brand(href='/admin_salesman/users') Usuarios
         .izquierda 
-            a.navbar-brand(href='/login') Cerrar sesión
+            a.navbar-brand(href='/logout') Cerrar sesión
     nav.navbar.mb-4.navbar-custom2
         .derecha
             a.navbar-brand2.active2(href='/admin_salesman/inventory') Mostrar inventario
             a.navbar-brand2(href='/admin_salesman/inventory/allProducts') Administrar productos
-            a.navbar-brand2(href='/admin_salesman/inventory/add') Agregar producto
+            - if (userDB.rol != 'cajero')
+                a.navbar-brand2(href='/admin_salesman/inventory/add') Agregar producto
+    - if (errors.length > 0)
+        .alert.alert-danger
+            label(for='error') Se han encontrado los siguientes errores:
+            ul
+                each dt in errors 
+                    li 
+                        label(for='error')="["+dt.param+"]: "+dt.msg
+    - if (success)
+        .alert.alert-success
+            label(for='error') Se ha modificado el producto del inventario.
     #centerInd3
         h1=title 
     
@@ -45,12 +57,18 @@ block content
                     td
                         label(for='talla') Talla:
                     td
-                        input#talla.form-control(type='text' maxlength='9' name='talla' value=data.talla)
+                        select.form-select.text-center(name="talla" id="talla" class='currency')
+                            option(value='NoAplica' selected = selectedTalla == 1)='NoAplica'
+                            option(value='XCH' selected = selectedTalla == 2)='XCH'
+                            option(value='CH' selected = selectedTalla == 3)='CH'
+                            option(value='M' selected = selectedTalla == 4)='M'
+                            option(value='G' selected = selectedTalla == 5)='G'
+                            option(value='XG' selected = selectedTalla == 6)='XG'
                 tr 
                     td
                         label(for='cantidad') Cantidad de prendas:
                     td
-                        input#cantidad.form-control(type='text' maxlength='9' name='cantidad', value=data.cantidad)
+                        input#cantidad.form-control(type='number' maxlength='9' name='cantidad', value=data.cantidad)
                 tr
                     td 
                     td
@@ -58,3 +76,6 @@ block content
 
     #centerInd 
         a.btn.btn-danger(href='/admin_salesman/inventory') Cancelar
+
+block scIcon
+    link(rel="shortcut icon", href="../../../assets/logoC.png")

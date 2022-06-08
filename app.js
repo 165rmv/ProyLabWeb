@@ -9,6 +9,18 @@ var bodyParser = require('body-parser')
 var logger = require('morgan');
 let appConfig = require('./configs/app');
 
+// Auth0
+const { auth } = require('express-openid-connect');
+require('dotenv').config()
+
+const config = {
+  authRequired: false,
+  auth0Logout: true,
+  secret: process.env.SECRET,
+  baseURL: process.env.BASEURL,
+  clientID: process.env.CLIENTID,
+  issuerBaseURL: process.env.ISSUERBASEURL,
+};
 
 var indexRouter = require('./routes/index');
 var loginRouter = require('./routes/login');
@@ -18,9 +30,6 @@ var workerInventory = require('./routes/admin_salesman/inventory');
 var workerSales = require('./routes/admin_salesman/sales');
 var clientsRouter = require('./routes/clientes/index');
 var usersRouter = require('./routes/admin_salesman/usuarios');
-
-// APIs
-var inventarioAPIRouter = require('./routes/api/inventario');
 var tiendasAPIRouter = require('./routes/api/tiendas');
 
 
@@ -35,6 +44,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cookieParser());
+app.use(auth(config));
 /*
 app.use(session({
   cookie: { maxAge: 60000 },
@@ -56,7 +66,6 @@ app.use('/clientes', clientsRouter);
 app.use('/admin_salesman/users', usersRouter);
 
 // APIs
-app.use('/api/inventario', inventarioAPIRouter);
 app.use('/api/tiendas', tiendasAPIRouter);
 
 

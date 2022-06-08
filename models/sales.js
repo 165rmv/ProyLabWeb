@@ -15,6 +15,11 @@ exports.allSales = () => {
     return knex.select('*').from('ventas')
 }
 
+exports.allSalesOfAProduct = (id_producto) => {
+    idInt = parseInt(id_producto)
+    return knex.select('*').from('ventas').where({id_producto: idInt})
+}
+
 exports.list_products_sold = (id_ticket) =>{
     return knex.select(knex.raw('p.nombre, p.precio, p.tipo'))
             .from(knex.raw('ventas as v'))
@@ -38,4 +43,11 @@ exports.time_stamp = (id_ticket) =>{
 exports.insertSale = (id_ticket, id_producto) => {
     return knex('ventas')
     .insert({id_ticket: id_ticket, id_producto: id_producto});
+}
+
+exports.updateSale = (id, sale) => {
+    return knex('ventas')
+    .update(sale)
+    .update('updated_at', knex.fn.now())
+    .where('id', parseInt(id));
 }

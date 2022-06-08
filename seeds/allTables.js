@@ -20,9 +20,11 @@ exports.seed = async function(knex) {
     {nombre: 'Pedro', apellido: 'Ramirez', rol: 'cajero', currency: 'MXN', email: 'pedrito_16@gmail.com', password: bcrypt.hashSync('50hellmanns', 10)},
     {nombre: 'Fernanda', apellido: 'Gutierrez', rol: 'gerente', currency: 'MXN', email: 'estrellita.guti@gmail.com', password: bcrypt.hashSync('perritosb0n1t0s', 10)},
     {nombre: 'Alejandro', apellido: 'Martinez', rol: 'cajero', currency: 'MXN', email: 'ale_martinez@gmail.com', password: bcrypt.hashSync('Pepsiman93', 10)},
-    {nombre: 'Valeria', apellido: 'Fuente', rol: 'duenio', currency: 'MXN', email: 'val_fuente@gmail.com', password: bcrypt.hashSync('v4lFuente', 10)}
+    {nombre: 'Emiliano', apellido: 'Pineda', rol: 'gerente', currency: 'MXN', email: 'emi.rock11@hotmail.com', password: bcrypt.hashSync('Pepsiman93', 10)},
+    {nombre: 'Valeria', apellido: 'Fuente', rol: 'duenio', currency: 'MXN', email: 'aesthfashi.sa@gmail.com', password: bcrypt.hashSync('v4lFuente', 10)}
   ]);
   await knex('productos').insert([
+    {nombre: 'Producto antiguo', tipo: 'noTocar', genero: 'M', precio: 250.00, descripcion: 'ignorar'},
     {nombre: 'cara_feliz', tipo: 'playera', genero: 'M', precio: 250.00, descripcion: 'Playera amarilla con una cara feliz.'},
     {nombre: 'sencilla_blanca_cc', tipo: 'playera', genero: 'M', precio: 200.00, descripcion: 'Playera blanca sin estampado con cuello circular.'},
     {nombre: 'short_mezclilla', tipo: 'short', genero: 'M', precio: 299.99, descripcion: 'Short de mezclilla desgastado.'},
@@ -31,24 +33,24 @@ exports.seed = async function(knex) {
     {nombre: 'negro_sencillo_cc', tipo: 'playera', genero: 'H', precio: 200.00, descripcion: 'Playera de color negro con cuello circular.'}
   ]);
   await knex('inventario').insert([
-    {id_producto: 1, cantidad: 6, talla: 'CH'},
-    {id_producto: 1, cantidad: 9, talla: 'M'},
-    {id_producto: 1, cantidad: 15, talla: 'G'},
-    {id_producto: 1, cantidad: 9, talla: 'XG'},
-    {id_producto: 2, cantidad: 11, talla: 'CH'},
-    {id_producto: 2, cantidad: 10, talla: 'M'},
-    {id_producto: 2, cantidad: 8, talla: 'G'},
-    {id_producto: 3, cantidad: 12, talla: '7'},
-    {id_producto: 3, cantidad: 9, talla: '9'},
-    {id_producto: 4, cantidad: 10, talla: 'CH'},
-    {id_producto: 4, cantidad: 5, talla: 'M'},
-    {id_producto: 4, cantidad: 6, talla: 'G'},
-    {id_producto: 5, cantidad: 5, talla: 'CH'},
-    {id_producto: 5, cantidad: 10, talla: 'M'},
-    {id_producto: 5, cantidad: 9, talla: 'G'},
-    {id_producto: 6, cantidad: 2, talla: 'CH'},
-    {id_producto: 6, cantidad: 4, talla: 'M'},
-    {id_producto: 6, cantidad: 6, talla: 'G'},
+    {id_producto: 2, cantidad: 6, talla: 'CH'},
+    {id_producto: 2, cantidad: 9, talla: 'M'},
+    {id_producto: 2, cantidad: 15, talla: 'G'},
+    {id_producto: 2, cantidad: 9, talla: 'XG'},
+    {id_producto: 3, cantidad: 11, talla: 'CH'},
+    {id_producto: 3, cantidad: 10, talla: 'M'},
+    {id_producto: 3, cantidad: 8, talla: 'G'},
+    {id_producto: 4, cantidad: 12, talla: '7'},
+    {id_producto: 4, cantidad: 9, talla: '9'},
+    {id_producto: 5, cantidad: 10, talla: 'CH'},
+    {id_producto: 5, cantidad: 5, talla: 'M'},
+    {id_producto: 5, cantidad: 6, talla: 'G'},
+    {id_producto: 6, cantidad: 5, talla: 'CH'},
+    {id_producto: 6, cantidad: 10, talla: 'M'},
+    {id_producto: 6, cantidad: 9, talla: 'G'},
+    {id_producto: 7, cantidad: 2, talla: 'CH'},
+    {id_producto: 7, cantidad: 4, talla: 'M'},
+    {id_producto: 7, cantidad: 6, talla: 'G'},
   ]);
   await knex('tickets').insert([
     {total: 250.00, id_usuario: 2},
@@ -59,12 +61,12 @@ exports.seed = async function(knex) {
     {total: 250.00, id_usuario: 2},
   ]);
   await knex('ventas').insert([
-    {id_ticket: 1, id_producto: 1},
-    {id_ticket: 2, id_producto: 1},
+    {id_ticket: 1, id_producto: 2},
     {id_ticket: 2, id_producto: 2},
-    {id_ticket: 3, id_producto: 3},
-    {id_ticket: 4, id_producto: 5},
-    {id_ticket: 5, id_producto: 1},
-    {id_ticket: 6, id_producto: 1},
+    {id_ticket: 2, id_producto: 3},
+    {id_ticket: 3, id_producto: 4},
+    {id_ticket: 4, id_producto: 6},
+    {id_ticket: 5, id_producto: 2},
+    {id_ticket: 6, id_producto: 2},
   ]);
 };

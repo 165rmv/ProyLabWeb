@@ -5,7 +5,7 @@ block cssleaflet
     script(src='https://unpkg.com/leaflet@1.7.1/dist/leaflet.js' integrity='sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==' crossorigin='')
     style.
         #map{
-        z-index: -1;
+        z-index: 0;
         height: 500px;
         width: 70%;
         margin: 0 auto;
@@ -24,7 +24,7 @@ block content
             a.navbar-brand(href='/clientes/visit-us') Visítanos
             a.navbar-brand(href='/clientes/about-us') Quiénes somos
         .izquierda 
-            a.navbar-brand(href='/login') Iniciar sesión
+            a.navbar-brand(href='/') 
     br
     br
     #centerInd
@@ -35,3 +35,8 @@ block content
 
     script(src='../javascripts/jquery-3.6.0.min.js')
     script(src='../javascripts/map.js')
+
+block imgLog 
+    .centerLog
+        img(src='../assets/logoC.png')
+

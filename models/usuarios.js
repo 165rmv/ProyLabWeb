@@ -12,9 +12,13 @@ exports.firsUser = () => {
     return knex.select('*').from('usuarios').where({'rol':'noTocar'})
 }
 
+exports.getUserByEmail = (email) => {
+    return knex.select('*').from('usuarios').where({'email':email})
+}
+
 exports.insertUser = (nombre, apellido, rol, email, password) => {
     return knex('usuarios')
-    .insert({nombre: nombre, apellido: apellido, rol: rol, email: email, password: password});
+    .insert({nombre: nombre, apellido: apellido, rol: rol, currency:'MXN', email: email, password: password});
 }
 
 exports.deleteUser = (id) => {

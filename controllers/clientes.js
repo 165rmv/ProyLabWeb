@@ -56,70 +56,99 @@ function exchangefromJson(currency, data){
     return
 }
 
+exports.homePage = (req, res) => {
+    if(req.oidc.isAuthenticated()){
+        if(!req.oidc.user.email_verified){
+            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
+        }else{
+            Usuarios.getUserByEmail(req.oidc.user.email)
+            .then((user) =>{
+                if(user.length == 0){
+                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
+                }else{
+                    Inventario.allInventory()
+                    .then((data) => {
+                        res.redirect('admin_salesman/inventory');
+                    });
+                }
+            })
+            
+        }
+    }else{
+        res.render('clientes/index', { title: 'Aesthetic Fashion', isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user });
+    }
+    
+}
+
+exports.aboutUs = (req, res) => {
+    if(req.oidc.isAuthenticated()){
+        if(!req.oidc.user.email_verified){
+            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
+        }else{
+            Usuarios.getUserByEmail(req.oidc.user.email)
+            .then((user) =>{
+                if(user.length == 0){
+                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
+                }else{
+                    Inventario.allInventory()
+                    .then((data) => {
+                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
+                    });
+                }
+            })
+            
+        }
+    }else{
+        res.render('clientes/aboutUs', {title: 'Quiénes somos', isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user});
+    }
+    
+}
+
+exports.visitUs = (req, res) => {
+    if(req.oidc.isAuthenticated()){
+        if(!req.oidc.user.email_verified){
+            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
+        }else{
+            Usuarios.getUserByEmail(req.oidc.user.email)
+            .then((user) =>{
+                if(user.length == 0){
+                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
+                }else{
+                    Inventario.allInventory()
+                    .then((data) => {
+                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
+                    });
+                }
+            })
+            
+        }
+    }else{
+        res.render('clientes/visitUs', {title: '¡Visita nuestras sucursales!', isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user});
+    }
+    
+}
+
 exports.men_products = (req, res) => {
-    Productos.menProducts()
-    .then((data) => {
-        Usuarios.getCurrency()
-        .then((curr) => {
-            let selectedCur = 0
-            let currSign = '$'
-            if (curr.currency == "EUR"){
-                currSign = '€'
-                selectedCur = 1
-            }else if (curr.currency == "MXN"){
-                selectedCur = 2
-            }else if (curr.currency == "USD"){
-                selectedCur = 3
-            }else if (curr.currency == "CLP"){
-                selectedCur = 4
-            }else if (curr.currency == "URY"){
-                selectedCur = 5
-            }
-            exchangefromJson(selectedCur, data)
-            res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign})
-        });
-    });
-}
-
-exports.men_productsPOST = (req, res) => {
-    Usuarios.firsUser()
-    .then((user) => {
-        Usuarios.setCurrency({nombre: user.nombre, apellido: user.apellido, rol: user.rol, currency: req.body.currencySelect, email: user.email, password: user.password})
-        .then((nothing) => {
-            Productos.menProducts()
-            .then((data) => {
-                Usuarios.getCurrency()
-                .then((curr) => {
-                    
-                    let selectedCur = 0
-                    let currSign = '$'
-                    if (curr.currency == "EUR"){
-                        currSign = '€'
-                        selectedCur = 1
-                    }else if (curr.currency == "MXN"){
-                        selectedCur = 2
-                    }else if (curr.currency == "USD"){
-                        selectedCur = 3
-                    }else if (curr.currency == "CLP"){
-                        selectedCur = 4
-                    }else if (curr.currency == "URY"){
-                        selectedCur = 5
-                    }
-                    exchangefromJson(selectedCur, data)
-                    res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign})
-                });
-            });
-        })
-    })
-}
-
-
-exports.productDetail = (req, res) => {
-    idProduct = req.params.id
-    Inventario.findByIdInProducts(idProduct)
-    .then((dataProduct) => {
-        Inventario.findByIdInInventoryndProducts(idProduct)
-        .then((dataInventario) => {
+    if(req.oidc.isAuthenticated()){
+        if(!req.oidc.user.email_verified){
+            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
+        }else{
+            Usuarios.getUserByEmail(req.oidc.user.email)
+            .then((user) =>{
+                if(user.length == 0){
+                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
+                }else{
+                    Inventario.allInventory()
+                    .then((data) => {
+                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
+                    });
+                }
+            })
+            
+        }
+    }else{
+        Productos.menProducts()
+        .then((data) => {
             Usuarios.getCurrency()
             .then((curr) => {
                 let selectedCur = 0
@@ -136,27 +165,41 @@ exports.productDetail = (req, res) => {
                 }else if (curr.currency == "URY"){
                     selectedCur = 5
                 }
-                exchangeOne(selectedCur, dataProduct)
-                res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign})
+                exchangefromJson(selectedCur, data)
+                res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated()})
             });
-                
-        })
-        
-    })
+        });
+    }
 }
 
-exports.productDetailPOST = (req, res) => {
-    Usuarios.firsUser()
-    .then((user) => {
-        Usuarios.setCurrency({nombre: user.nombre, apellido: user.apellido, rol: user.rol, currency: req.body.currencySelect, email: user.email, password: user.password})
-        .then((nothing) => {
-            idProduct = req.params.id
-            Inventario.findByIdInProducts(idProduct)
-            .then((dataProduct) => {
-                Inventario.findByIdInInventoryndProducts(idProduct)
-                .then((dataInventario) => {
+exports.men_productsPOST = (req, res) => {
+    if(req.oidc.isAuthenticated()){
+        if(!req.oidc.user.email_verified){
+            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
+        }else{
+            Usuarios.getUserByEmail(req.oidc.user.email)
+            .then((user) =>{
+                if(user.length == 0){
+                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
+                }else{
+                    Inventario.allInventory()
+                    .then((data) => {
+                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
+                    });
+                }
+            })
+            
+        }
+    }else{
+        Usuarios.firsUser()
+        .then((user) => {
+            Usuarios.setCurrency({nombre: user.nombre, apellido: user.apellido, rol: user.rol, currency: req.body.currencySelect, email: user.email, password: user.password})
+            .then((nothing) => {
+                Productos.menProducts()
+                .then((data) => {
                     Usuarios.getCurrency()
                     .then((curr) => {
+                        
                         let selectedCur = 0
                         let currSign = '$'
                         if (curr.currency == "EUR"){
@@ -171,50 +214,40 @@ exports.productDetailPOST = (req, res) => {
                         }else if (curr.currency == "URY"){
                             selectedCur = 5
                         }
-                        exchangeOne(selectedCur, dataProduct)
-                        res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign})
-                        
+                        exchangefromJson(selectedCur, data)
+                        res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
                     });
-                })
-                
+                });
             })
-                
         })
-    })
+    }
 }
 
-exports.women_products = (req, res) => {
-    Productos.womenProducts()
-    .then((data) => {
-        Usuarios.getCurrency()
-        .then((curr) => {
-            let selectedCur = 0
-            let currSign = '$'
-            if (curr.currency == "EUR"){
-                currSign = '€'
-                selectedCur = 1
-            }else if (curr.currency == "MXN"){
-                selectedCur = 2
-            }else if (curr.currency == "USD"){
-                selectedCur = 3
-            }else if (curr.currency == "CLP"){
-                selectedCur = 4
-            }else if (curr.currency == "URY"){
-                selectedCur = 5
-            }
-            exchangefromJson(selectedCur, data)
-            res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign})
-        });
-    });
-}
 
-exports.women_productsPOST = (req, res) => {
-    Usuarios.firsUser()
-    .then((user) => {
-        Usuarios.setCurrency({nombre: user.nombre, apellido: user.apellido, rol: user.rol, currency: req.body.currencySelect, email: user.email, password: user.password})
-        .then((nothing) => {
-            Productos.womenProducts()
-            .then((data) => {
+exports.productDetail = (req, res) => {
+    if(req.oidc.isAuthenticated()){
+        if(!req.oidc.user.email_verified){
+            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
+        }else{
+            Usuarios.getUserByEmail(req.oidc.user.email)
+            .then((user) =>{
+                if(user.length == 0){
+                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
+                }else{
+                    Inventario.allInventory()
+                    .then((data) => {
+                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
+                    });
+                }
+            })
+            
+        }
+    }else{
+        idProduct = req.params.id
+        Inventario.findByIdInProducts(idProduct)
+        .then((dataProduct) => {
+            Inventario.findByIdInInventoryndProducts(idProduct)
+            .then((dataInventario) => {
                 Usuarios.getCurrency()
                 .then((curr) => {
                     let selectedCur = 0
@@ -231,10 +264,163 @@ exports.women_productsPOST = (req, res) => {
                     }else if (curr.currency == "URY"){
                         selectedCur = 5
                     }
-                    exchangefromJson(selectedCur, data)
-                    res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign})
+                    exchangeOne(selectedCur, dataProduct)
+                    res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
                 });
-            });
+                    
+            })
+            
         })
-    })
+    }
+}
+
+exports.productDetailPOST = (req, res) => {
+    if(req.oidc.isAuthenticated()){
+        if(!req.oidc.user.email_verified){
+            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
+        }else{
+            Usuarios.getUserByEmail(req.oidc.user.email)
+            .then((user) =>{
+                if(user.length == 0){
+                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
+                }else{
+                    Inventario.allInventory()
+                    .then((data) => {
+                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
+                    });
+                }
+            })
+            
+        }
+    }else{
+        Usuarios.firsUser()
+        .then((user) => {
+            Usuarios.setCurrency({nombre: user.nombre, apellido: user.apellido, rol: user.rol, currency: req.body.currencySelect, email: user.email, password: user.password})
+            .then((nothing) => {
+                idProduct = req.params.id
+                Inventario.findByIdInProducts(idProduct)
+                .then((dataProduct) => {
+                    Inventario.findByIdInInventoryndProducts(idProduct)
+                    .then((dataInventario) => {
+                        Usuarios.getCurrency()
+                        .then((curr) => {
+                            let selectedCur = 0
+                            let currSign = '$'
+                            if (curr.currency == "EUR"){
+                                currSign = '€'
+                                selectedCur = 1
+                            }else if (curr.currency == "MXN"){
+                                selectedCur = 2
+                            }else if (curr.currency == "USD"){
+                                selectedCur = 3
+                            }else if (curr.currency == "CLP"){
+                                selectedCur = 4
+                            }else if (curr.currency == "URY"){
+                                selectedCur = 5
+                            }
+                            exchangeOne(selectedCur, dataProduct)
+                            res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                            
+                        });
+                    })
+                    
+                })
+                    
+            })
+        })
+    }
+}
+
+exports.women_products = (req, res) => {
+    if(req.oidc.isAuthenticated()){
+        if(!req.oidc.user.email_verified){
+            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
+        }else{
+            Usuarios.getUserByEmail(req.oidc.user.email)
+            .then((user) =>{
+                if(user.length == 0){
+                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
+                }else{
+                    Inventario.allInventory()
+                    .then((data) => {
+                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
+                    });
+                }
+            })
+            
+        }
+    }else{
+        Productos.womenProducts()
+        .then((data) => {
+            Usuarios.getCurrency()
+            .then((curr) => {
+                let selectedCur = 0
+                let currSign = '$'
+                if (curr.currency == "EUR"){
+                    currSign = '€'
+                    selectedCur = 1
+                }else if (curr.currency == "MXN"){
+                    selectedCur = 2
+                }else if (curr.currency == "USD"){
+                    selectedCur = 3
+                }else if (curr.currency == "CLP"){
+                    selectedCur = 4
+                }else if (curr.currency == "URY"){
+                    selectedCur = 5
+                }
+                exchangefromJson(selectedCur, data)
+                res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+            });
+        });
+    }
+}
+
+exports.women_productsPOST = (req, res) => {
+    if(req.oidc.isAuthenticated()){
+        if(!req.oidc.user.email_verified){
+            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
+        }else{
+            Usuarios.getUserByEmail(req.oidc.user.email)
+            .then((user) =>{
+                if(user.length == 0){
+                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
+                }else{
+                    Inventario.allInventory()
+                    .then((data) => {
+                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
+                    });
+                }
+            })
+            
+        }
+    }else{
+        Usuarios.firsUser()
+        .then((user) => {
+            Usuarios.setCurrency({nombre: user.nombre, apellido: user.apellido, rol: user.rol, currency: req.body.currencySelect, email: user.email, password: user.password})
+            .then((nothing) => {
+                Productos.womenProducts()
+                .then((data) => {
+                    Usuarios.getCurrency()
+                    .then((curr) => {
+                        let selectedCur = 0
+                        let currSign = '$'
+                        if (curr.currency == "EUR"){
+                            currSign = '€'
+                            selectedCur = 1
+                        }else if (curr.currency == "MXN"){
+                            selectedCur = 2
+                        }else if (curr.currency == "USD"){
+                            selectedCur = 3
+                        }else if (curr.currency == "CLP"){
+                            selectedCur = 4
+                        }else if (curr.currency == "URY"){
+                            selectedCur = 5
+                        }
+                        exchangefromJson(selectedCur, data)
+                        res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                    });
+                });
+            })
+        })
+    }
 }

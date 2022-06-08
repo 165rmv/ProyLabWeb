@@ -6,14 +6,26 @@ block content
             img(src='../../../../assets/logoC.png')
             a.navbar-brand.active(href='/admin_salesman/inventory') Inventario
             a.navbar-brand(href='/admin_salesman/sales') Ventas
-            a.navbar-brand(href='/admin_salesman/users') Usuarios
+            - if (userDB.rol == 'duenio')
+                a.navbar-brand(href='/admin_salesman/users') Usuarios
         .izquierda 
-            a.navbar-brand(href='/login') Cerrar sesión
+            a.navbar-brand(href='/logout') Cerrar sesión
     nav.navbar.mb-4.navbar-custom2
         .derecha
             a.navbar-brand2(href='/admin_salesman/inventory') Mostrar inventario
             a.navbar-brand2.active2(href='/admin_salesman/inventory/allProducts') Administrar productos
-            a.navbar-brand2(href='/admin_salesman/inventory/add') Agregar producto
+            - if (userDB.rol != 'cajero')
+                a.navbar-brand2(href='/admin_salesman/inventory/add') Agregar producto
+    - if (errors.length > 0)
+        .alert.alert-danger
+            label(for='error') Se han encontrado los siguientes errores:
+            ul
+                each dt in errors 
+                    li 
+                        label(for='error')="["+dt.param+"]: "+dt.msg
+    - if (success)
+        .alert.alert-success
+            label(for='error') Se ha acualizado el producto.
     #centerInd3
         h1=title
         br
@@ -38,12 +50,18 @@ block content
                     td
                         label(for='tipo') Tipo de prenda:
                     td
-                        input#tipo.form-control(type='text' name='tipo' value=data.tipo)
+                        select.form-select.text-center(name="tipo" id="tipo")
+                            option(value='short' selected = selectedType == 1)='Short'
+                            option(value='playera' selected = selectedType == 2)='Playera'
+                            option(value='pantalon' selected = selectedType == 3)='Pantalon'
+                            option(value='accesorio' selected = selectedType == 4)='Accesorio'
                 tr  
                     td
-                        label(for='genero') Genero (H / M):
+                        label(for='genero') Genero:
                     td
-                        input#genero.form-control(type='text' maxlength='10' name='genero', value=data.genero)
+                        select.form-select.text-center(name="genero" id="genero")
+                            option(value='M' selected = selectedGenero == 2)='M'
+                            option(value='H' selected = selectedGenero == 1)='H'
                 tr 
                     td
                         label(for='descripcion') Descripcion:
@@ -55,3 +73,6 @@ block content
                         input.btn.btn-success(type='submit' value='Actualizar')
     #centerInd 
         a.btn.btn-danger(href='/admin_salesman/inventory/allProducts') Cancelar
+
+block scIcon
+    link(rel="shortcut icon", href="../../../../assets/logoC.png")

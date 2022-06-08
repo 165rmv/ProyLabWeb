@@ -7,7 +7,7 @@ exports.allInventory = () =>{
 }
 
 exports.allProducts = () =>{
-    return knex.select('*').from('productos');
+    return knex.select('*').from('productos').whereNot({'tipo':'noTocar'});
 }
 
 exports.findByIdInProducts = (idProduct) =>{
@@ -77,6 +77,11 @@ exports.updateInventario = (id, inventario) => {
 exports.deleteInventario = (id) => {
     idInt = parseInt(id)
     return knex('inventario').where({id: idInt}).del();
+}
+
+exports.deleteProductosFromInventario = (id_producto) => {
+    idInt = parseInt(id_producto)
+    return knex('inventario').where({id_producto: idInt}).del();
 }
 
 

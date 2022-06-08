@@ -50,3 +50,5 @@ Cabe recalcar que cada que se corran las pruebas, si se desea correr el proyecto
 
 Lo faltante dentro de nuestro proyecto para esta entrega fue el login y la autenticación de los usuarios, pero en general todo lo demás ya se ha realizado, lo que nos falta sería terminar el estilo de la página principal, esto faltante de los usuarios e implementar el express-validation, pues nos ha dado algunos conflictos debido a que al obtener los requirements del body de algunas páginas para agregar usuarios o productos, ventas, etc, nos muestra como undefined y por más que estuvimos buscando no supimos porqué, entonces eso quedaría pendiente igual para una asesoría y ver qué nos pueda decir el profesor.
 Lo faltante para el proyecto es la implementación de las APIs, las cuaes tenemos en mente una que es para mostrar las ubicaciones de los locales de ropa y otra que se nos ocurría era para realizar gráficas y el super-admin (dueño) pueda ver estas métricas sobre las ventas que se han realizado.
+
+superAdmin22

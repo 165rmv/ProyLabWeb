@@ -8,11 +8,14 @@ block content
             a.navbar-brand(href='/admin_salesman/sales') Ventas
             a.navbar-brand.active(href='/admin_salesman/users') Usuarios
         .izquierda 
-            a.navbar-brand(href='/login') Cerrar sesión
+            a.navbar-brand(href='/logout') Cerrar sesión
     nav.navbar.mb-4.navbar-custom2
         .derecha
             a.navbar-brand2.active2(href='/admin_salesman/users') Administrar usuarios
-            a.navbar-brand2(href='/admin_salesman/users/add') Crear usuario
+            a.navbar-brand2(href='/admin_salesman/users/add') Agregar usuario
+    - if (success)
+        .alert.alert-success
+            label(for='error') Se ha eliminado el usuario.
     #centerInd3
         h1=title 
     br
@@ -37,3 +40,6 @@ block content
                                 input(type='hidden' name='id' value= dt.id)
                                 button.link-button.btn.btn-danger(type='submit' name='submit_param' value='submit_value' class='btn')
                                     = 'Eliminar'
+
+block scIcon
+    link(rel="shortcut icon", href="../assets/logoC.png")

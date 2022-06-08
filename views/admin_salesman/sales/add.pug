@@ -7,13 +7,25 @@ block content
             img(src='../../assets/logoC.png')
             a.navbar-brand(href='/admin_salesman/inventory') Inventario
             a.navbar-brand.active(href='/admin_salesman/sales') Ventas
-            a.navbar-brand(href='/admin_salesman/users') Usuarios
+            - if (userDB.rol == 'duenio')
+                a.navbar-brand(href='/admin_salesman/users') Usuarios
         .izquierda 
-            a.navbar-brand(href='/login') Cerrar sesión
+            a.navbar-brand(href='/logout') Cerrar sesión
     nav.navbar.mb-4.navbar-custom2
         .derecha
             a.navbar-brand2(href='/admin_salesman/sales') Mostrar ventas
-            a.navbar-brand2.active2(href='/admin_salesman/sales/add') Agregar venta
+            - if (userDB.rol == 'cajero')
+                a.navbar-brand2.active2(href='/admin_salesman/sales/add') Agregar venta
+    - if (errors.length > 0)
+        .alert.alert-danger
+            label(for='error') Se han encontrado los siguientes errores:
+            ul
+                each dt in errors 
+                    li 
+                        label(for='error')="["+dt.param+"]: "+dt.msg
+    - if (success)
+        .alert.alert-success
+            label(for='error') Se ha agregado la venta.
     #centerInd3
         h1=title
         br
@@ -38,3 +50,5 @@ block content
                         td
                             input.btn.btn-success(type='submit' value='Agregar venta')
                     
+block scIcon
+    link(rel="shortcut icon", href="../../assets/logoC.png")

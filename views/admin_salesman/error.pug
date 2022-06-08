@@ -1,0 +1,32 @@
+extends ../layout 
+
+block content
+    .error 
+        | Error
+    #centerInd3
+        h1=title
+    .errormsg
+        - if(err == 1)
+            p 
+                |   No tienes acceso a esta página.
+            a.btn.btn-primary(href='/logout') Regresar 
+
+        - if(err == 2)
+            p 
+                |   Para poder tener acceso a esta página, debes de verificar tu email primero.
+                |   Revisa en tu bandeja de correo electrónico, busca aquel correo con el nombre
+                |   de "Aesthetic Fashion" y ábrelo, ahí verás un link para verificar, con tan 
+                |   solo dar click en el link ya tendrás tu cuenta verificada
+            a.btn.btn-primary(href='/logout') Regresar 
+        - if(err == 3)
+            p 
+                |   El usuario no se encuentra dentro de la base de datos de la tienda. Contáctese
+                |   con el dueño para que sea agregado a la base de datos y pueda hacer uso de su cuenta.
+            a.btn.btn-primary(href='/logout') Regresar
+        - if(err == 4)
+            p 
+                |   No tienes acceso a esta página por tu rol de usuario.
+            a.btn.btn-primary(href='/admin_salesman/inventory') Regresar
+
+block scIcon
+    link(rel="shortcut icon", href="../assets/logoC.png")

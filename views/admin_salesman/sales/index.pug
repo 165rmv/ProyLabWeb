@@ -6,13 +6,15 @@ block content
             img(src='../assets/logoC.png')
             a.navbar-brand(href='/admin_salesman/inventory') Inventario
             a.navbar-brand.active(href='/admin_salesman/sales') Ventas
-            a.navbar-brand(href='/admin_salesman/users') Usuarios
+            - if (userDB.rol == 'duenio')
+                a.navbar-brand(href='/admin_salesman/users') Usuarios
         .izquierda 
-            a.navbar-brand(href='/login') Cerrar sesión
+            a.navbar-brand(href='/logout') Cerrar sesión
     nav.navbar.mb-4.navbar-custom2
         .derecha
             a.navbar-brand2.active2(href='/admin_salesman/sales') Mostrar ventas
-            a.navbar-brand2(href='/admin_salesman/sales/add') Agregar venta
+            - if (userDB.rol == 'cajero')
+                a.navbar-brand2(href='/admin_salesman/sales/add') Agregar venta
     #centerInd3
         h1=title 
     br
@@ -38,3 +40,6 @@ block content
                         td='$'+dt.total_venta 
                         td 
                             a(href ='sales/'+dt.id+ '/details') Detalles
+
+block scIcon
+    link(rel="shortcut icon", href="../assets/logoC.png")
