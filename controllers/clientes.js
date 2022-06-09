@@ -1,60 +1,9 @@
 let Productos = require('../models/productos')
 let Inventario = require('../models/inventario')
-let Currency = require('../public/jsons/currency.json')
 let Usuarios = require('../models/usuarios');
+const CurrConverter = require('currency-converter-lt')
 
-function exchangeOne(currency, data){
-    let currEx = 0
-    switch(currency){
-        case 1:
-            currEx = Currency[0].EUR
-            break;
-        case 2:
-            currEx = 1
-            break;
-        case 3:
-            currEx = Currency[0].USD
-            break;
-        case 4:
-            currEx = Currency[0].CLP
-            break;
-        case 5:
-            currEx = Currency[0].URY
-            break;
-    }
-    data.precio *=  currEx
-    data.precio = data.precio.toFixed(2)
-    
-    return
-}
-
-function exchangefromJson(currency, data){
-    let currEx = 0
-    switch(currency){
-        case 1:
-            currEx = Currency[0].EUR
-            break;
-        case 2:
-            currEx = 1
-            break;
-        case 3:
-            currEx = Currency[0].USD
-            break;
-        case 4:
-            currEx = Currency[0].CLP
-            break;
-        case 5:
-            currEx = Currency[0].URY
-            break;
-    }
-    for(let i = 0; i<data.length; i++){
-        data[i].precio *=  currEx
-        data[i].precio = data[i].precio.toFixed(2)
-        console.log(data[i].precio)
-    }
-    
-    return
-}
+let currencyConverter = new CurrConverter();
 
 exports.homePage = (req, res) => {
     if(req.oidc.isAuthenticated()){
@@ -162,11 +111,21 @@ exports.men_products = (req, res) => {
                     selectedCur = 3
                 }else if (curr.currency == "CLP"){
                     selectedCur = 4
-                }else if (curr.currency == "URY"){
+                }else if (curr.currency == "ARS"){
                     selectedCur = 5
                 }
-                exchangefromJson(selectedCur, data)
-                res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated()})
+                if(curr.currency != "MXN"){
+                    currencyConverter.from("MXN").to(curr.currency).amount(1).convert().then((response) => {
+                        for(let i = 0; i<data.length; i++){
+                            data[i].precio *=  response
+                            data[i].precio = data[i].precio.toFixed(2)
+                        }
+                        res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                    })
+                }else{
+                    res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                }
+                
             });
         });
     }
@@ -211,11 +170,20 @@ exports.men_productsPOST = (req, res) => {
                             selectedCur = 3
                         }else if (curr.currency == "CLP"){
                             selectedCur = 4
-                        }else if (curr.currency == "URY"){
+                        }else if (curr.currency == "ARS"){
                             selectedCur = 5
                         }
-                        exchangefromJson(selectedCur, data)
-                        res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                        if(curr.currency != "MXN"){
+                            currencyConverter.from("MXN").to(curr.currency).amount(1).convert().then((response) => {
+                                for(let i = 0; i<data.length; i++){
+                                    data[i].precio *=  response
+                                    data[i].precio = data[i].precio.toFixed(2)
+                                }
+                                res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                            })
+                        }else{
+                            res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                        }
                     });
                 });
             })
@@ -261,11 +229,19 @@ exports.productDetail = (req, res) => {
                         selectedCur = 3
                     }else if (curr.currency == "CLP"){
                         selectedCur = 4
-                    }else if (curr.currency == "URY"){
+                    }else if (curr.currency == "ARS"){
                         selectedCur = 5
                     }
-                    exchangeOne(selectedCur, dataProduct)
-                    res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                    if(curr.currency != "MXN"){
+                        currencyConverter.from("MXN").to(curr.currency).amount(1).convert().then((response) => {
+                            dataProduct.precio *=  response
+                            dataProduct.precio = dataProduct.precio.toFixed(2)
+                            res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                        })
+                    }else{
+                        res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                    }
+                    
                 });
                     
             })
@@ -315,11 +291,18 @@ exports.productDetailPOST = (req, res) => {
                                 selectedCur = 3
                             }else if (curr.currency == "CLP"){
                                 selectedCur = 4
-                            }else if (curr.currency == "URY"){
+                            }else if (curr.currency == "ARS"){
                                 selectedCur = 5
                             }
-                            exchangeOne(selectedCur, dataProduct)
-                            res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                            if(curr.currency != "MXN"){
+                                currencyConverter.from("MXN").to(curr.currency).amount(1).convert().then((response) => {
+                                    data.precio *=  response
+                                    data.precio = data.precio.toFixed(2)
+                                    res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                                })
+                            }else{
+                                res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                            }
                             
                         });
                     })
@@ -365,11 +348,20 @@ exports.women_products = (req, res) => {
                     selectedCur = 3
                 }else if (curr.currency == "CLP"){
                     selectedCur = 4
-                }else if (curr.currency == "URY"){
+                }else if (curr.currency == "ARS"){
                     selectedCur = 5
                 }
-                exchangefromJson(selectedCur, data)
-                res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                if(curr.currency != "MXN"){
+                    currencyConverter.from("MXN").to(curr.currency).amount(1).convert().then((response) => {
+                        for(let i = 0; i<data.length; i++){
+                            data[i].precio *=  response
+                            data[i].precio = data[i].precio.toFixed(2)
+                        }
+                        res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                    })
+                }else{
+                    res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                }
             });
         });
     }
@@ -413,11 +405,20 @@ exports.women_productsPOST = (req, res) => {
                             selectedCur = 3
                         }else if (curr.currency == "CLP"){
                             selectedCur = 4
-                        }else if (curr.currency == "URY"){
+                        }else if (curr.currency == "ARS"){
                             selectedCur = 5
                         }
-                        exchangefromJson(selectedCur, data)
-                        res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                        if(curr.currency != "MXN"){
+                            currencyConverter.from("MXN").to(curr.currency).amount(1).convert().then((response) => {
+                                for(let i = 0; i<data.length; i++){
+                                    data[i].precio *=  response
+                                    data[i].precio = data[i].precio.toFixed(2)
+                                }
+                                res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                            })
+                        }else{
+                            res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                        }
                     });
                 });
             })

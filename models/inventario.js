@@ -7,7 +7,7 @@ exports.allInventory = () =>{
 }
 
 exports.allProducts = () =>{
-    return knex.select('*').from('productos').whereNot({'tipo':'noTocar'});
+    return knex.select('*').from('productos').whereNot({'descripcion':'noTocar'});
 }
 
 exports.findByIdInProducts = (idProduct) =>{

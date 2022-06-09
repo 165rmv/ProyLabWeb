@@ -24,7 +24,7 @@ exports.seed = async function(knex) {
     {nombre: 'Valeria', apellido: 'Fuente', rol: 'duenio', currency: 'MXN', email: 'aesthfashi.sa@gmail.com', password: bcrypt.hashSync('v4lFuente', 10)}
   ]);
   await knex('productos').insert([
-    {nombre: 'Producto antiguo', tipo: 'noTocar', genero: 'M', precio: 250.00, descripcion: 'ignorar'},
+    {nombre: 'Producto antiguo', tipo: 'eliminado', genero: 'M', precio: 250.00, descripcion: 'noTocar'},
     {nombre: 'cara_feliz', tipo: 'playera', genero: 'M', precio: 250.00, descripcion: 'Playera amarilla con una cara feliz.'},
     {nombre: 'sencilla_blanca_cc', tipo: 'playera', genero: 'M', precio: 200.00, descripcion: 'Playera blanca sin estampado con cuello circular.'},
     {nombre: 'short_mezclilla', tipo: 'short', genero: 'M', precio: 299.99, descripcion: 'Short de mezclilla desgastado.'},
