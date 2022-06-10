@@ -4,24 +4,59 @@ block content
     nav.navbar.mb-4.navbar-custom
         .derecha
             a(href='/clientes')
-                img(src='../assets/logoC.png')
+                img(src=logoC)
             a.navbar-brand(href='/clientes') Inicio
             a.navbar-brand(href='/clientes/ropa-hombre') Hombre
             a.navbar-brand(href='/clientes/ropa-mujer') Mujer
             a.navbar-brand(href='/clientes/visit-us') Visítanos
             a.navbar-brand(href='/clientes/about-us') Quiénes somos
         .izquierda 
-            a.navbar-brand(href='/') 
+            a.navbar-brand(href='/')
     br
     br
-    #centerInd
+    #centerIndCli
         h1=title
     br
+    
     br
+    #p1 
+        p   
+            | Somos Aesthetic Fashion, una marca que busca venderte estilo, diseños exclusivos y una pisca de arte contemporáneo combinado con la más alta calidad en la ropa que parece de otro mundo.
+    br
+    .logoAF
+        img(src="https://firebasestorage.googleapis.com/v0/b/aesthetic-fashion-4a9dd.appspot.com/o/assets%2FlogoM.png?alt=media&token=ea2f5ab3-2d00-44ac-8647-a665a4060e7d")
+        .logoAF2
+            img(src='https://firebasestorage.googleapis.com/v0/b/aesthetic-fashion-4a9dd.appspot.com/o/assets%2F62e3c7dedfd5a241d4a2aceeab224586.gif?alt=media&token=4f6ab944-fef8-46b7-84fd-923ff31391b4')
+    br
+    #p1 
+        p   
+            | La moda no sólo existe en los vestidos. La moda está en el cielo, en las calles, la moda tiene que ver con ideas, la forma en que vivimos y lo qué está sucediendo. Para nosotros el vestir bien es conocerse a uno mismo, para aprender a vestirse debes saber qué es lo que te gusta, lo que no te gusta, con qué te sientes cómodo... y nosotros estamos para poder ayudarte en este camino del autoconocimiento.
+    
+    br
+    br
+    
+    .footer.mt-4
+        .row.mt-3
+            .col-md-3.col-lg-4.col-xl-3.mx-auto.mb-4.blurFooter
+                // Content
+                h6.text-uppercase.fw-bold.mb-4
+                    i.fas.fa-gem.me-3
+                        | Equipo:
+                
+                p
+                    | Rodrigo Gerardo Morán Valencia
+                p
+                    | Eduardo Alejandro García García
+                p
+                    | Diego Aguilar Gutiérrez
+                p
+                    | Emiliano Antonio Pineda Hernández
+    
+
 block imgLog 
     .centerLog
         a(href='/login')
-            img(src='../assets/logoC.png')
+            img(src=logoC)
 
 block scIcon 
-    link(rel="shortcut icon", href="../assets/logoC.png")
+    link(rel="shortcut icon", href=logoC)

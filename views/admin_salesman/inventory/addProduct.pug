@@ -23,53 +23,57 @@ block content
                         label(for='error')="["+dt.param+"]: "+dt.msg
     - if (success)
         .alert.alert-success
-            label(for='error') Se ha acualizado el producto.
+            label(for='error') Se ha agregado el producto a la base de datos.
     #centerInd3
-        h1=title
+        h1=title 
         br
-        
-    
-    
-    form(action=`/admin_salesman/inventory/allProducts/${data.id}/editProduct` method='POST')
+    br
+    form(action='/admin_salesman/inventory/addProduct' method='POST')
         #table
             table.table.table-hover
                 tr 
                     td
                         label(for='nombre') Nombre:
                     td
-                        input#nombre.form-control(type='text' name='nombre' value=data.nombre)
-                tr
-                    td
-                        label(for='precio') Precio (MXN):
-                    td
-                        input#precio.form-control(type='text' maxlength='9' name='precio', value=data.precio)
+                        input#nombre.form-control(type='text' name='nombre')
                 tr 
                     td
                         label(for='tipo') Tipo de prenda:
                     td
                         select.form-select.text-center(name="tipo" id="tipo")
-                            option(value='short' selected = selectedType == 1)='Short'
-                            option(value='playera' selected = selectedType == 2)='Playera'
-                            option(value='pantalon' selected = selectedType == 3)='Pantalon'
-                            option(value='accesorio' selected = selectedType == 4)='Accesorio'
-                tr  
+                            option(value='short')='Short'
+                            option(value='playera')='Playera'
+                            option(value='pantalon')='Pantalon'
+                            option(value='accesorio')='Accesorio'
+                tr 
                     td
                         label(for='genero') Genero:
                     td
                         select.form-select.text-center(name="genero" id="genero")
-                            option(value='M' selected = selectedGenero == 2)='M'
-                            option(value='H' selected = selectedGenero == 1)='H'
-                tr 
+                            option(value='M')='M'
+                            option(value='H')='H'
+                tr
+                
+                    td
+                        label(for='precio') Precio (MXN):
+                    td
+                        input#precio.form-control(type='text' maxlength='9' name='precio')
+                tr
+                
                     td
                         label(for='descripcion') Descripcion:
                     td
-                        textarea#descripcion.form-control(name="descripcion", cols="30", rows="10")=data.descripcion
+                        textarea#descripcion.form-control(name="descripcion", cols="30", rows="10")
+                tr
+                
+                    td
+                        label(for='imagen') Imagen:
+                    td
+                        input#imagen.form-control(type='file' name='imagen' accept="image/png, image/jpeg")
                 tr
                     td 
                     td
-                        input.btn.btn-success(type='submit' value='Actualizar')
-    #centerInd 
-        a.btn.btn-danger(href='/admin_salesman/inventory/allProducts') Cancelar
+                        input.btn.btn-success(type='submit' value='Agregar')
 
 block scIcon
     link(rel="shortcut icon", href=logoC)

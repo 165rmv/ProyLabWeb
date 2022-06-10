@@ -4,7 +4,7 @@ extends ../../layout
 block content
     nav.navbar.mb-4.navbar-custom
         .derecha
-            img(src='../../assets/logoC.png')
+            img(src=logoC)
             a.navbar-brand(href='/admin_salesman/inventory') Inventario
             a.navbar-brand.active(href='/admin_salesman/sales') Ventas
             - if (userDB.rol == 'duenio')
@@ -51,4 +51,4 @@ block content
                             input.btn.btn-success(type='submit' value='Agregar venta')
                     
 block scIcon
-    link(rel="shortcut icon", href="../../assets/logoC.png")
+    link(rel="shortcut icon", href=logoC)

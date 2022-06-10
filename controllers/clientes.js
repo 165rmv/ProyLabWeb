@@ -2,99 +2,135 @@ let Productos = require('../models/productos')
 let Inventario = require('../models/inventario')
 let Usuarios = require('../models/usuarios');
 const CurrConverter = require('currency-converter-lt')
-
 let currencyConverter = new CurrConverter();
+
+const admin = require('firebase-admin');
+
+const db = admin.database();
 
 exports.homePage = (req, res) => {
     if(req.oidc.isAuthenticated()){
-        if(!req.oidc.user.email_verified){
-            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
-        }else{
-            Usuarios.getUserByEmail(req.oidc.user.email)
-            .then((user) =>{
-                if(user.length == 0){
-                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
-                }else{
-                    Inventario.allInventory()
-                    .then((data) => {
-                        res.redirect('admin_salesman/inventory');
-                    });
-                }
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            if(!req.oidc.user.email_verified){
+                res.render('admin_salesman/error', {title: 'Email no verificado', err:2, logoC:entradas.logoC});
+            }else{
+                Usuarios.getUserByEmail(req.oidc.user.email)
+                .then((user) =>{
+                    if(user.length == 0){
+                        res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3, logoC:entradas.logoC});
+                    }else{
+                        Inventario.allInventory()
+                        .then((data) => {
+                            res.redirect('admin_salesman/inventory');
+                        });
+                    }
+                })
+                
+            }
+        })
+    }else{
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            db.ref('img').child('index').once('value', (snapshot2) =>{
+                const entradasIndex = snapshot2.val()
+                res.render('clientes/index', { title: 'Aesthetic Fashion', isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC, imgs:entradasIndex });
             })
             
-        }
-    }else{
-        res.render('clientes/index', { title: 'Aesthetic Fashion', isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user });
+        });
+        
     }
     
 }
 
 exports.aboutUs = (req, res) => {
     if(req.oidc.isAuthenticated()){
-        if(!req.oidc.user.email_verified){
-            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
-        }else{
-            Usuarios.getUserByEmail(req.oidc.user.email)
-            .then((user) =>{
-                if(user.length == 0){
-                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
-                }else{
-                    Inventario.allInventory()
-                    .then((data) => {
-                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
-                    });
-                }
-            })
-            
-        }
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            if(!req.oidc.user.email_verified){
+                res.render('admin_salesman/error', {title: 'Email no verificado', err:2, logoC:entradas.logoC});
+            }else{
+                Usuarios.getUserByEmail(req.oidc.user.email)
+                .then((user) =>{
+                    if(user.length == 0){
+                        res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3, logoC:entradas.logoC});
+                    }else{
+                        Inventario.allInventory()
+                        .then((data) => {
+                            res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user, logoC:entradas.logoC});
+                            
+                        });
+                    }
+                })
+                
+            }
+        })
     }else{
-        res.render('clientes/aboutUs', {title: 'Quiénes somos', isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user});
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            res.render('clientes/aboutUs', {title: 'Quiénes somos', isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC});
+        });
+        
     }
     
 }
 
 exports.visitUs = (req, res) => {
     if(req.oidc.isAuthenticated()){
-        if(!req.oidc.user.email_verified){
-            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
-        }else{
-            Usuarios.getUserByEmail(req.oidc.user.email)
-            .then((user) =>{
-                if(user.length == 0){
-                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
-                }else{
-                    Inventario.allInventory()
-                    .then((data) => {
-                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
-                    });
-                }
-            })
-            
-        }
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            if(!req.oidc.user.email_verified){
+                res.render('admin_salesman/error', {title: 'Email no verificado', err:2, logoC:entradas.logoC});
+            }else{
+                Usuarios.getUserByEmail(req.oidc.user.email)
+                .then((user) =>{
+                    if(user.length == 0){
+                        res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3, logoC:entradas.logoC});
+                    }else{
+                        Inventario.allInventory()
+                        .then((data) => {
+                            res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user, logoC:entradas.logoC});
+                            
+                        });
+                    }
+                })
+                
+            }
+        })
     }else{
-        res.render('clientes/visitUs', {title: '¡Visita nuestras sucursales!', isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user});
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            res.render('clientes/visitUs', {title: '¡Visita nuestras sucursales!', isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC});
+        })
+        
     }
     
 }
 
 exports.men_products = (req, res) => {
     if(req.oidc.isAuthenticated()){
-        if(!req.oidc.user.email_verified){
-            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
-        }else{
-            Usuarios.getUserByEmail(req.oidc.user.email)
-            .then((user) =>{
-                if(user.length == 0){
-                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
-                }else{
-                    Inventario.allInventory()
-                    .then((data) => {
-                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
-                    });
-                }
-            })
-            
-        }
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            if(!req.oidc.user.email_verified){
+                res.render('admin_salesman/error', {title: 'Email no verificado', err:2, logoC:entradas.logoC});
+            }else{
+                Usuarios.getUserByEmail(req.oidc.user.email)
+                .then((user) =>{
+                    if(user.length == 0){
+                        res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3, logoC:entradas.logoC});
+                    }else{
+                        Inventario.allInventory()
+                        .then((data) => {
+                            db.ref('img').child('assets').once('value', (snapshot) =>{
+                                const entradas = snapshot.val();
+                                res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user, logoC: entradas.logoC});
+                            });
+                        });
+                    }
+                })
+                
+            }
+        })
     }else{
         Productos.menProducts()
         .then((data) => {
@@ -120,10 +156,17 @@ exports.men_products = (req, res) => {
                             data[i].precio *=  response
                             data[i].precio = data[i].precio.toFixed(2)
                         }
-                        res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                        db.ref('img').child('assets').once('value', (snapshot) =>{
+                            const entradas = snapshot.val();
+                            res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                        });
+                        
                     })
                 }else{
-                    res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                    db.ref('img').child('assets').once('value', (snapshot) =>{
+                        const entradas = snapshot.val();
+                        res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                    });
                 }
                 
             });
@@ -133,22 +176,28 @@ exports.men_products = (req, res) => {
 
 exports.men_productsPOST = (req, res) => {
     if(req.oidc.isAuthenticated()){
-        if(!req.oidc.user.email_verified){
-            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
-        }else{
-            Usuarios.getUserByEmail(req.oidc.user.email)
-            .then((user) =>{
-                if(user.length == 0){
-                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
-                }else{
-                    Inventario.allInventory()
-                    .then((data) => {
-                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
-                    });
-                }
-            })
-            
-        }
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            if(!req.oidc.user.email_verified){
+                res.render('admin_salesman/error', {title: 'Email no verificado', err:2, logoC:entradas.logoC});
+            }else{
+                Usuarios.getUserByEmail(req.oidc.user.email)
+                .then((user) =>{
+                    if(user.length == 0){
+                        res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3, logoC:entradas.logoC});
+                    }else{
+                        Inventario.allInventory()
+                        .then((data) => {
+                            db.ref('img').child('assets').once('value', (snapshot) =>{
+                                const entradas = snapshot.val();
+                                res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user, logoC:entradas.logoC});
+                            })
+                        });
+                    }
+                })
+                
+            }
+        })
     }else{
         Usuarios.firsUser()
         .then((user) => {
@@ -179,10 +228,16 @@ exports.men_productsPOST = (req, res) => {
                                     data[i].precio *=  response
                                     data[i].precio = data[i].precio.toFixed(2)
                                 }
-                                res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                                db.ref('img').child('assets').once('value', (snapshot) =>{
+                                    const entradas = snapshot.val();
+                                    res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                                })
                             })
                         }else{
-                            res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                            db.ref('img').child('assets').once('value', (snapshot) =>{
+                                const entradas = snapshot.val();
+                                res.render('clientes/hombre', {title: 'Ropa para hombre', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                            });
                         }
                     });
                 });
@@ -194,22 +249,28 @@ exports.men_productsPOST = (req, res) => {
 
 exports.productDetail = (req, res) => {
     if(req.oidc.isAuthenticated()){
-        if(!req.oidc.user.email_verified){
-            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
-        }else{
-            Usuarios.getUserByEmail(req.oidc.user.email)
-            .then((user) =>{
-                if(user.length == 0){
-                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
-                }else{
-                    Inventario.allInventory()
-                    .then((data) => {
-                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
-                    });
-                }
-            })
-            
-        }
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            if(!req.oidc.user.email_verified){
+                res.render('admin_salesman/error', {title: 'Email no verificado', err:2, logoC:entradas.logoC});
+            }else{
+                Usuarios.getUserByEmail(req.oidc.user.email)
+                .then((user) =>{
+                    if(user.length == 0){
+                        res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3, logoC:entradas.logoC});
+                    }else{
+                        Inventario.allInventory()
+                        .then((data) => {
+                            db.ref('img').child('assets').once('value', (snapshot) =>{
+                                const entradas = snapshot.val();
+                                res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user, logoC:entradas.logoC});
+                            })
+                        });
+                    }
+                })
+                
+            }
+        })
     }else{
         idProduct = req.params.id
         Inventario.findByIdInProducts(idProduct)
@@ -233,13 +294,20 @@ exports.productDetail = (req, res) => {
                         selectedCur = 5
                     }
                     if(curr.currency != "MXN"){
-                        currencyConverter.from("MXN").to(curr.currency).amount(1).convert().then((response) => {
-                            dataProduct.precio *=  response
-                            dataProduct.precio = dataProduct.precio.toFixed(2)
-                            res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                        currencyConverter.from("MXN").to(curr.currency).amount(1).convert()
+                        .then((response) => {
+                            dataProduct[0].precio *=  response
+                            dataProduct[0].precio = dataProduct[0].precio.toFixed(2)
+                            db.ref('img').child('assets').once('value', (snapshot) =>{
+                                const entradas = snapshot.val();
+                                res.render('clientes/productDetail', {title: dataProduct[0].nombre, dataProduct: dataProduct[0], dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                            });
                         })
                     }else{
-                        res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                        db.ref('img').child('assets').once('value', (snapshot) =>{
+                            const entradas = snapshot.val();
+                            res.render('clientes/productDetail', {title: dataProduct[0].nombre, dataProduct: dataProduct[0], dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                        });
                     }
                     
                 });
@@ -252,22 +320,28 @@ exports.productDetail = (req, res) => {
 
 exports.productDetailPOST = (req, res) => {
     if(req.oidc.isAuthenticated()){
-        if(!req.oidc.user.email_verified){
-            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
-        }else{
-            Usuarios.getUserByEmail(req.oidc.user.email)
-            .then((user) =>{
-                if(user.length == 0){
-                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
-                }else{
-                    Inventario.allInventory()
-                    .then((data) => {
-                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
-                    });
-                }
-            })
-            
-        }
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            if(!req.oidc.user.email_verified){
+                res.render('admin_salesman/error', {title: 'Email no verificado', err:2, logoC:entradas.logoC});
+            }else{
+                Usuarios.getUserByEmail(req.oidc.user.email)
+                .then((user) =>{
+                    if(user.length == 0){
+                        res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3, logoC:entradas.logoC});
+                    }else{
+                        Inventario.allInventory()
+                        .then((data) => {
+                            db.ref('img').child('assets').once('value', (snapshot) =>{
+                                const entradas = snapshot.val();
+                                res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user, logoC:entradas.logoC});
+                            });
+                        });
+                    }
+                })
+                
+            }
+        })
     }else{
         Usuarios.firsUser()
         .then((user) => {
@@ -296,12 +370,18 @@ exports.productDetailPOST = (req, res) => {
                             }
                             if(curr.currency != "MXN"){
                                 currencyConverter.from("MXN").to(curr.currency).amount(1).convert().then((response) => {
-                                    data.precio *=  response
-                                    data.precio = data.precio.toFixed(2)
-                                    res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                                    dataProduct[0].precio *=  response
+                                    dataProduct[0].precio = dataProduct[0].precio.toFixed(2)
+                                    db.ref('img').child('assets').once('value', (snapshot) =>{
+                                        const entradas = snapshot.val();
+                                        res.render('clientes/productDetail', {title: dataProduct[0].nombre, dataProduct: dataProduct[0], dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                                    });
                                 })
                             }else{
-                                res.render('clientes/productDetail', {title: dataProduct.nombre, dataProduct: dataProduct, dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                                db.ref('img').child('assets').once('value', (snapshot) =>{
+                                    const entradas = snapshot.val();
+                                    res.render('clientes/productDetail', {title: dataProduct[0].nombre, dataProduct: dataProduct[0], dataInventario: dataInventario, curr: curr, selectedCur: selectedCur, currSign: currSign, isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                                });
                             }
                             
                         });
@@ -316,22 +396,28 @@ exports.productDetailPOST = (req, res) => {
 
 exports.women_products = (req, res) => {
     if(req.oidc.isAuthenticated()){
-        if(!req.oidc.user.email_verified){
-            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
-        }else{
-            Usuarios.getUserByEmail(req.oidc.user.email)
-            .then((user) =>{
-                if(user.length == 0){
-                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
-                }else{
-                    Inventario.allInventory()
-                    .then((data) => {
-                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
-                    });
-                }
-            })
-            
-        }
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            if(!req.oidc.user.email_verified){
+                res.render('admin_salesman/error', {title: 'Email no verificado', err:2, logoC:entradas.logoC});
+            }else{
+                Usuarios.getUserByEmail(req.oidc.user.email)
+                .then((user) =>{
+                    if(user.length == 0){
+                        res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3, logoC:entradas.logoC});
+                    }else{
+                        Inventario.allInventory()
+                        .then((data) => {
+                            db.ref('img').child('assets').once('value', (snapshot) =>{
+                                const entradas = snapshot.val();
+                                res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user, logoC:entradas.logoC});
+                            });
+                        });
+                    }
+                })
+                
+            }
+        })
     }else{
         Productos.womenProducts()
         .then((data) => {
@@ -357,10 +443,16 @@ exports.women_products = (req, res) => {
                             data[i].precio *=  response
                             data[i].precio = data[i].precio.toFixed(2)
                         }
-                        res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                        db.ref('img').child('assets').once('value', (snapshot) =>{
+                            const entradas = snapshot.val();
+                            res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                        });
                     })
                 }else{
-                    res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                    db.ref('img').child('assets').once('value', (snapshot) =>{
+                        const entradas = snapshot.val();
+                        res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                    });
                 }
             });
         });
@@ -369,22 +461,28 @@ exports.women_products = (req, res) => {
 
 exports.women_productsPOST = (req, res) => {
     if(req.oidc.isAuthenticated()){
-        if(!req.oidc.user.email_verified){
-            res.render('admin_salesman/error', {title: 'Email no verificado', err:2});
-        }else{
-            Usuarios.getUserByEmail(req.oidc.user.email)
-            .then((user) =>{
-                if(user.length == 0){
-                    res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3});
-                }else{
-                    Inventario.allInventory()
-                    .then((data) => {
-                        res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user});
-                    });
-                }
-            })
-            
-        }
+        db.ref('img').child('assets').once('value', (snapshot) =>{
+            const entradas = snapshot.val();
+            if(!req.oidc.user.email_verified){
+                res.render('admin_salesman/error', {title: 'Email no verificado', err:2, logoC:entradas.logoC});
+            }else{
+                Usuarios.getUserByEmail(req.oidc.user.email)
+                .then((user) =>{
+                    if(user.length == 0){
+                        res.render('admin_salesman/error', {title: 'Usuario no encontrado', err:3, logoC:entradas.logoC});
+                    }else{
+                        Inventario.allInventory()
+                        .then((data) => {
+                            db.ref('img').child('assets').once('value', (snapshot) =>{
+                                const entradas = snapshot.val();
+                                res.render('admin_salesman/inventory/index', {title: 'Inventario', data: data, userAuth: req.oidc.user, logoC:entradas.logoC});
+                            });
+                        });
+                    }
+                })
+                
+            }
+        })
     }else{
         Usuarios.firsUser()
         .then((user) => {
@@ -414,10 +512,16 @@ exports.women_productsPOST = (req, res) => {
                                     data[i].precio *=  response
                                     data[i].precio = data[i].precio.toFixed(2)
                                 }
-                                res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                                db.ref('img').child('assets').once('value', (snapshot) =>{
+                                    const entradas = snapshot.val();
+                                    res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                                });
                             })
                         }else{
-                            res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user})
+                            db.ref('img').child('assets').once('value', (snapshot) =>{
+                                const entradas = snapshot.val();
+                                res.render('clientes/mujer', {title: 'Ropa para mujer', data: data, curr: curr, selectedCur: selectedCur, currSign: currSign,isAuthenticated: req.oidc.isAuthenticated(), userAuth: req.oidc.user, logoC:entradas.logoC})
+                            });
                         }
                     });
                 });

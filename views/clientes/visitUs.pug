@@ -9,6 +9,7 @@ block cssleaflet
         height: 500px;
         width: 70%;
         margin: 0 auto;
+        box-shadow: 0 0 10px rgba(0,0,0,.3);
         border: 1px solid black;
         margin-bottom: 40px;
         }
@@ -17,7 +18,7 @@ block content
     nav.navbar.mb-4.navbar-custom   
         .derecha
             a(href='/clientes')
-                img(src='../assets/logoC.png')
+                img(src=logoC)
             a.navbar-brand(href='/clientes') Inicio
             a.navbar-brand(href='/clientes/ropa-hombre') Hombre
             a.navbar-brand(href='/clientes/ropa-mujer') Mujer
@@ -27,7 +28,7 @@ block content
             a.navbar-brand(href='/') 
     br
     br
-    #centerInd
+    #centerIndCli
         h1=title
     br
     br
@@ -38,5 +39,5 @@ block content
 
 block imgLog 
     .centerLog
-        img(src='../assets/logoC.png')
+        img(src=logoC)
 

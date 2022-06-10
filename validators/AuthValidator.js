@@ -1,4 +1,5 @@
 const { parse } = require("dotenv");
+let fs = require('fs')
 
 exports.validateAddUser = function(nombre, apellido, mail){
     let regex = new RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}');
@@ -25,7 +26,7 @@ exports.validateAddSale = function(id_inventario){
     return errors
 }
 
-exports.validateAddProduct = function(nombre, tipoPrenda, talla, genero, precio, cantidadPrendas, descripcion){
+exports.validateAddProductProducts = function(nombre, precio, descripcion){
     let regPrecio = new RegExp('^[0-9]{1,6}([.][0-9]{1,2})?$')
     let errors = []
 
@@ -37,11 +38,20 @@ exports.validateAddProduct = function(nombre, tipoPrenda, talla, genero, precio,
     }else if(!regPrecio.test(precio)){
         errors.push({'param':'Sintaxis', 'msg':'El precio debe contener máximo dos decimales y no más de 9 caracteres (incluyendo el punto)'})
     }
-    if(cantidadPrendas.length == 0){
-        errors.push({'param':'Vacío', 'msg':'Input de la cantidad de prendas vacío'})
-    }
     if(descripcion.length == 0){
         errors.push({'param':'Vacío', 'msg':'Input de la descripcion vacío'})
+    }
+    return errors
+}
+
+exports.validateAddProductInventario = function(id_producto, cantidadPrendas){
+    let errors = []
+
+    if(id_producto.length == 0){
+        errors.push({'param':'Vacío', 'msg':'Input del nombre vacío'})
+    }
+    if(cantidadPrendas.length == 0){
+        errors.push({'param':'Vacío', 'msg':'Input de la cantidad de prendas vacío'})
     }
     return errors
 }

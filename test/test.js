@@ -344,7 +344,6 @@ describe('Pruebas de MochaJS', () => {
         it('Se obtiene un usuario por su email', (done) =>{
             Usuarios.getUserByEmail("pedrito_16@gmail.com")
             .then((data) => {
-                //console.log(data[0]);
                 expect(data.length).to.equal(1)
             })
             done();
@@ -371,9 +370,7 @@ describe('Pruebas de MochaJS', () => {
         it('Se modifican los id_product de ventas.', (done) =>{
             Ventas.allSalesOfAProduct(2)
             .then((data) => {
-                //console.log(data.length)
                 for(let i = 0; i < data.length; i++){
-                    //console.log(data[i])
                     Ventas.updateSale(data[i].id, {id_ticket: data[i].id_ticket, id_producto: 1})
                     .then((empty) =>{
                         if(i == data.length-1){
@@ -435,8 +432,6 @@ describe('Pruebas de MochaJS', () => {
                 let actualSpecLength = numbers.filter(number => number === countSpec.number).length;
                 countSpec.count = actualSpecLength;
             })
-
-            console.log(counterSpecimens[1]);
             done();
         });
     });*/

@@ -3,7 +3,7 @@ extends ../../layout
 block content 
     nav.navbar.mb-4.navbar-custom
         .derecha
-            img(src='../assets/logoC.png')
+            img(src=logoC)
             a.navbar-brand.active(href='/admin_salesman/inventory') Inventario
             a.navbar-brand(href='/admin_salesman/sales') Ventas
             - if (userDB.rol == 'duenio')
@@ -13,12 +13,16 @@ block content
     nav.navbar.mb-4.navbar-custom2
         .derecha
             a.navbar-brand2.active2(href='/admin_salesman/inventory') Mostrar inventario
-            a.navbar-brand2(href='/admin_salesman/inventory/allProducts') Administrar productos
-            - if (userDB.rol != 'cajero')
-                a.navbar-brand2(href='/admin_salesman/inventory/add') Agregar producto
+            a.navbar-brand2(href='/admin_salesman/inventory/allProducts') Mostrar productos
+    - if (success)
+        .alert.alert-success
+            label(for='error') Se ha eliminado el producto.
     #centerInd3
         h1=title 
     br
+    - if (userDB.rol != 'cajero')
+        .addBtn.d-flex.flex-row-reverse.mx-5
+            a.btn.btn-primary.d-inline-flex(href='/admin_salesman/inventory/add') Agregar producto al inventario
     br
     #table
         table.table.table-hover
@@ -32,6 +36,7 @@ block content
                     th Talla
                     - if (userDB.rol != 'cajero')
                         th 
+                        th
             
             tbody 
                 each dt in data
@@ -45,6 +50,11 @@ block content
                         - if (userDB.rol != 'cajero')
                             td 
                                 a(href = 'inventory/'+ dt.id + '/edit') Editar 
+                            td 
+                                form.inline(method='post' action= 'inventory/'+ dt.id + '/delete')
+                                    input(type='hidden' name='id' value= dt.id)
+                                    button.link-button.btn.btn-danger(type='submit' name='submit_param' value='submit_value' class='btn')
+                                        = 'Eliminar'
 
 block scIcon
-    link(rel="shortcut icon", href="../assets/logoC.png")
+    link(rel="shortcut icon", href=logoC)

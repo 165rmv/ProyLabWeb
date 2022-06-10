@@ -1,5 +1,5 @@
 # Laboratorio de desarrollo de aplicaciones Web
-## _Proyecto integrador 2da entrega_
+## _Proyecto integrador: Entrega final_
 
 ### Rodrigo Gerardo Morán Valencia 
 ### Eduardo Alejandro García García 
@@ -11,7 +11,12 @@ Para poder observar la funcionalidad del proyecto, primero se debe utilizar el c
 ```sh
 npm i
 ```
-Así se creará la carpeta de **node_modules**, después se tendrá que crear un archivo **.env** para hacer uso de la base de datos de SQL con knex, este archivo debe estar en la primer capa de carpeta del proyecto y debe tener el siguiente contenido:
+Así se creará la carpeta de **node_modules**, después, se creará la base de datos en SQL, utilizando el CMD de MySQL o el Workbench, vamos a correr el siguiente comando:
+```sh
+create database aesthetic_fashion;
+```
+Con  esto, ya podremos hacer uso de la base de datos local, llamada "aesthetic_fashion". Una vez creada la base de datos, se tendrá que crear un archivo **.env** para hacer uso de la base de datos de SQL con knex, hacer uso de Auth0, y de Firebase. Este archivo debe estar en la primer capa de carpeta del proyecto y debe tener el siguiente contenido:
+
  ```sh
 NODE_ENV=development
 
@@ -28,12 +33,16 @@ DB_PRODUCTION_PORT=3306
 DB_PRODUCTION_NAME=aesthetic_fashion
 DB_PRODUCTION_USER=root
 DB_PRODUCTION_PASSWORD=root
+
+SECRET=alongrandomly-generatedstringstoredinenv
+BASEURL=http://localhost:3000
+CLIENTID=yC2JCnJAawabquizx1KUTpjKBHmizpOW
+ISSUERBASEURL=https://dev-jvsg1n46.us.auth0.com
+
+DBURLFIREBASE=https://aesthetic-fashion-4a9dd-default-rtdb.firebaseio.com/
  ```
-Se debe de crear la sabe de datos dentro de MySQL, para crear la base de datos se utiliza el siguiente comando:
-```sh
-create database aesthetic_fashion;
-```
-Y después de crear la base de datos, se deben de correr los archivos para la creación de las tablas y para utilizar seeds y rellenar las tablas, para esto se utilizan los siguientes dos comandos, se deben de correr en orden, primero la migración y después las seeds:
+
+Después de crear la base de datos y el archivo .env, se deben de correr los archivos para la creación de las tablas y para utilizar seeds y rellenar las tablas, para esto se utilizan los siguientes dos comandos, se deben de correr en orden, primero la migración y después las seeds:
 ```sh
 knex migrate:latest
 knex seed:run 
@@ -48,7 +57,18 @@ npm run test
 ```
 Cabe recalcar que cada que se corran las pruebas, si se desea correr el proyecto, antes se debe de volver a correr la migración de las tablas y sus semillas.
 
-Lo faltante dentro de nuestro proyecto para esta entrega fue el login y la autenticación de los usuarios, pero en general todo lo demás ya se ha realizado, lo que nos falta sería terminar el estilo de la página principal, esto faltante de los usuarios e implementar el express-validation, pues nos ha dado algunos conflictos debido a que al obtener los requirements del body de algunas páginas para agregar usuarios o productos, ventas, etc, nos muestra como undefined y por más que estuvimos buscando no supimos porqué, entonces eso quedaría pendiente igual para una asesoría y ver qué nos pueda decir el profesor.
-Lo faltante para el proyecto es la implementación de las APIs, las cuaes tenemos en mente una que es para mostrar las ubicaciones de los locales de ropa y otra que se nos ocurría era para realizar gráficas y el super-admin (dueño) pueda ver estas métricas sobre las ventas que se han realizado.
+## APIs utilizadas
 
+En total se utilizaron dos APIs, una fue para obtener el cambio de monedas y otra fue para mostrar ubicaciones dentro de un mapa de Google.
+
+## Valor agregado
+
+De valor agregado para la clase, nosotros decidimos utilizar Auth0, una ventaja de Auth0 son que nos brinda simplicidad y a su vez protección de las identidades en nuestra aplicación, es mucho más seguro debido a que las contraseñas se quedan este servicio. Dentro de esta plataforma se realizan las técnicas de hasheo a las contraseñas como lo vimos en clase, aparte que se maneja la autenticación y el login/logout de manera mucho más rápida y sencilla.
+
+Otra cosa que implementamos externo a lo qeu vimos en la clase fue Firebase para el guardado de las imágenes de manera remota, esto con el fin de que se pudiera hacer uso de imágenes de manera remota a nuestro proyecto.
+
+El uso de ambos servicios son desde la cuenta de "Dueño" la cual es:
+```sh
+aesthfashi.sa@gmail.com
 superAdmin22
+```

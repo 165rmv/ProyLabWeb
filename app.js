@@ -9,9 +9,23 @@ var bodyParser = require('body-parser')
 var logger = require('morgan');
 let appConfig = require('./configs/app');
 
+const admin = require('firebase-admin');
+const {Storage} = require('@google-cloud/storage');
+require('dotenv').config()
+
+let serviceAccount = require('./aesthetic-fashion-4a9dd-firebase-adminsdk-nblcy-d58263a281.json')
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: process.env.DBURLFIREBASE
+})
+
+const storage = new Storage({
+  keyFilename: serviceAccount,
+});
+
 // Auth0
 const { auth } = require('express-openid-connect');
-require('dotenv').config()
 
 const config = {
   authRequired: false,
@@ -38,6 +52,9 @@ var app = express();
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
+
+app.use(express.static('public')); 
+app.use('/images', express.static('images'));
 
 app.use(logger('dev'));
 app.use(express.json());

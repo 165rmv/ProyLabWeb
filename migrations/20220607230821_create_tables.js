@@ -14,6 +14,7 @@ exports.up = async function(knex, Promise) {
             table.string('genero', 10);
             table.decimal('precio', 8, 2).notNullable();
             table.string('descripcion', 512).notNullable();
+            table.string('img', 512).notNullable();
             table.timestamps(true, true);
         });
         await knex.schema.createTable('usuarios', (table) => {

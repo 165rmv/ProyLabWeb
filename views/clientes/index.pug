@@ -4,7 +4,7 @@ block content
     nav.navbar.mb-4.navbar-custom
         .derecha
             a(href='/clientes')
-                img(src='./assets/logoC.png')
+                img(src=logoC)
             a.navbar-brand(href='/clientes') Inicio
             a.navbar-brand(href='/clientes/ropa-hombre') Hombre
             a.navbar-brand(href='/clientes/ropa-mujer') Mujer
@@ -15,28 +15,35 @@ block content
     //br
     //br
 
-    #centerInd
+    #centerIndCli
         //h1=title
     
     //br
     //br
     .part1
         .img1
-            img(src='../assets/index/ph1.jpg')
+            img(src=imgs.ph1, alt="img1")
         .img2 
-            img(src="../assets/index/ph2.jpg", alt="img2") 
+            img(src=imgs.ph2, alt="img2") 
         .img3
-            img(src="../assets/index/ph3.jpg", alt="img3") 
+            img(src=imgs.ph3, alt="img3") 
         .img4
-            img(src="../assets/index/ph4.jpg", alt="img3") 
+            img(src=imgs.ph4, alt="img3") 
     
-    .lne
+    #frase 
+        h2 "La elegancia es la única belleza que nunca desaparece."
+        h3 -Audrey Hepburn 
+    
+    #p2 
+        p   
+            | Estamos en todo momento buscando lo último de la moda, así siempre usarás estilos distintos de lo más top del momento. Entra y checa nuestra ropa que está en nuestras tiendas y visítanos.
+    
 
     .part2 
 
 block imgLog 
     .centerLog
-        img(src='../assets/logoC.png')
+        img(src=logoC)
 
 block scIcon 
-    link(rel="shortcut icon", href="../assets/logoC.png")
+    link(rel="shortcut icon", href=logoC)

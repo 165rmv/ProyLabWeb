@@ -4,7 +4,7 @@ block content
     nav.navbar.mb-4.navbar-custom
         .derecha
             a(href='/clientes')
-                img(src='../../../assets/logoC.png')
+                img(src=logoC)
             a.navbar-brand(href='/clientes') Inicio
             a.navbar-brand(href='/clientes/ropa-hombre') Hombre
             a.navbar-brand(href='/clientes/ropa-mujer') Mujer
@@ -14,11 +14,11 @@ block content
             a.navbar-brand(href='/') 
     br
     br
-    #centerInd
+    #centerIndCli
         h1=title
     .allProductDetail
         .product 
-            img(src='../../../assets/productMen/square400x400.png')
+            img(src=dataProduct.img)
             .datosProducto2 
                 .desc
                     h2='Descripción:'
@@ -26,18 +26,21 @@ block content
                     label(for='descripcion')=dataProduct.descripcion
                 .precio 
                     label(for='precio')='Precio: '+currSign+dataProduct.precio+' '+curr.currency+'.'
-                .tallas
-                    label(for='precio')='Tallas disponibles en tienda:'
-                    .listado
-                        each dt in dataInventario 
-                            label(for='talla')=dt.talla
+                .tallas.text-center
+                    - if(dataInventario.length == 0)
+                            label(for='talla')='Agotado'
+                    - if(dataInventario.length > 0)
+                        label(for='precio')='Tallas disponibles en tienda:'
+                        .listado
+                            each dt in dataInventario 
+                                label(for='talla')=dt.talla
 
         a.btn.btn-primary.mt-4(href='javascript: history.go(-1)') Regresar
 
 block select
-    .d-flex.justify-content-center
-        .d-inline-flex.p-2.align-items-center
-        | Moneda: 
+    .d-flex.justify-content-center.align-items-center
+        .d-inline-flex.p-2.align-items-center.text-moneda
+            | Moneda: 
         form(method='post' action= 'info')
             select.form-select.text-center.mx-3(name="currencySelect" id="currency" class='currency')
                 option(value='EUR' selected = selectedCur == 1)='EUR'
@@ -49,7 +52,7 @@ block select
                                         = 'Cambiar moneda'
 block imgLog 
     .centerLog
-        img(src='../../../assets/logoC.png')
+        img(src=logoC)
 
 block scIcon 
-    link(rel="shortcut icon", href="../../../assets/logoC.png")
+    link(rel="shortcut icon", href=logoC)

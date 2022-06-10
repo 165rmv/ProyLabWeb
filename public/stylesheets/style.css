@@ -1,8 +1,17 @@
 body {
     
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-  background-color: rgb(228, 228, 228);
+  /*background-color: rgb(228, 228, 228);*/
+  background-color: #fefefe;
   /*background-image: url("../../assets/clouds_png.png")*/
+}
+
+#gradient
+{
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
 }
 
 table th, table td{
@@ -44,7 +53,7 @@ td a{
 }
 
 
-#centerInd, #centerInd2, #centerInd3{
+#centerInd, #centerInd2, #centerInd3, #centerIndCli{
   margin-top: 80px;
   font-size: 18px;
   display: flex;
@@ -66,6 +75,13 @@ td a{
 
 #centerInd h2{
   margin-bottom: 30px;
+}
+
+#centerIndCli h1{
+  padding: 15px;
+  color:#e2e2e2;
+  background-color: #00000044;
+  border-radius: 5px;
 }
 
 #aLog{
@@ -257,24 +273,20 @@ form{
   z-index: -1;
 }
 
-
-
-
-
 .part1{
   display: flex;
   justify-content: space-around;
   align-content: center;
   padding-top: 20px;
   padding-bottom: 20px;
-  background-color: #eeeeee;
   height: 500px;
   width: 100%;
 }
 
 .part1 .img1, .part1 .img2, .part1 .img3, .part1 .img4{
+
   margin-left: 25px;
-  
+  box-shadow: 0 0 10px rgba(0,0,0,.2);
   width: 25%;
   display:flex;
   justify-content: center;
@@ -305,11 +317,22 @@ form{
 }
 
 .datosProducto{
+  padding: 10px;
+  height: 170px;
+  width: 270px;
   display: flex;
   justify-content: center;
   flex-direction: column;
   align-content: center;
   margin-left: 20px;
+  color: #e2e2e2;
+  background-color: #00000044;
+  border-radius: 5px;
+}
+
+.datosProducto .desc h2{
+  padding-top: 10px;
+  overflow-wrap: break-word;
 }
 
 .datosProducto .aButton{
@@ -335,14 +358,23 @@ form{
   margin-bottom: 30px;
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 .datosProducto2{
+  padding: 20px;
   display: flex;
   justify-content:space-evenly;
   flex-direction: column;
   align-content: center;
   margin-left: 20px;
+  color: #e2e2e2;
+  background-color: #00000044;
+  border-radius: 5px;
+}
+
+.datosProducto2 .desc, .datosProducto2 .precio{
+  margin-bottom: 20px;
 }
 
 .datosProducto2 .desc h2{
@@ -517,4 +549,89 @@ form{
 
 .centerLog img{
   width: 80px;
+}
+
+.allProductDetail .product img{
+  box-shadow: 0 0 10px rgba(0,0,0,.2);
+  width: 450px;
+  height: 450px;
+}
+
+.productosPart .product img{
+  box-shadow: 0 0 10px rgba(0,0,0,.2);
+  width: 250px;
+  height: 250px;
+}
+
+.blurFooter, .blurFooter2{
+  padding-top: 10px;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  color: #e2e2e2;
+  background-color: #00000044;
+}
+
+.blurFooter2{
+  margin-top: 30px;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  flex-direction: column !important;
+}
+
+.text-moneda{
+  color: #e2e2e2;
+  font-size: 20px;
+}
+
+#frase{
+  margin-top: 20px;
+  text-align: center;
+  margin-bottom: 100px;
+  color: #f7f7f7;
+}
+
+#frase h2{
+  font-style: italic;
+}
+
+.logoAF, .logoAF2{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.logoAF img{
+  padding: 15px;
+  border-radius: 25px;
+  width: 150px;
+} 
+
+.logoAF2 img{
+  padding: 15px;
+  background-color: #fff3;
+  border-radius: 25px;
+  width: 300px;
+}
+
+#p1{
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: 23px;
+  color: #f7f7f7;
+}
+#p2{
+  display: flex;
+  justify-content: center;
+  margin-top: 50px;
+  margin-left: 10%;
+  margin-right: 10%;
+  font-size: 23px;
+  color: #f7f7f7;
 }

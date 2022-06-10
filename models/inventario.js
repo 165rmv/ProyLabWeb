@@ -32,9 +32,15 @@ exports.findByIdInInventory = (idInventory) =>{
     }
 }
 
+exports.findByIdInProducts = (id_producto) =>{
+    idP = parseInt(id_producto)
+    let product = knex.select('*').from('productos').where({id: idP}).whereNot({'descripcion':'noTocar'});
+    return product
+}
+
 exports.findByIdInInventoryndProducts = (idInventory) =>{
     idP = parseInt(idInventory)
-    let product = knex.select(knex.raw('inventario.id, inventario.id_producto, inventario.cantidad, inventario.talla, productos.nombre, productos.tipo, productos.genero, productos.precio')).from('inventario').join('productos', {'productos.id': 'inventario.id_producto'}).where({'inventario.id_producto': idP});
+    let product = knex.select(knex.raw('inventario.id, inventario.id_producto, inventario.cantidad, inventario.talla, productos.nombre, productos.tipo, productos.genero, productos.precio')).from('inventario').join('productos', {'productos.id': 'inventario.id_producto'}).where({'inventario.id_producto': idP}).whereNot({'descripcion':'noTocar'});
     if(product){
         return product
     }
@@ -46,7 +52,7 @@ exports.findByIdInInventoryndProducts = (idInventory) =>{
 
 exports.insertProducts = (product) => {
     return knex('productos')
-      .insert({nombre: product.nombre, tipo: product.tipo, genero: product.genero, precio: product.precio, descripcion: product.descripcion });
+      .insert({nombre: product.nombre, tipo: product.tipo, genero: product.genero, precio: product.precio, descripcion: product.descripcion, img: product.img });
 }
 
 exports.getIdLastProduct = () => {

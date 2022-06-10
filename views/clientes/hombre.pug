@@ -4,7 +4,7 @@ block content
     nav.navbar.mb-4.navbar-custom
         .derecha
             a(href='/clientes')
-                img(src='../assets/logoC.png')
+                img(src=logoC)
             a.navbar-brand(href='/clientes') Inicio
             a.navbar-brand(href='/clientes/ropa-hombre') Hombre
             a.navbar-brand(href='/clientes/ropa-mujer') Mujer
@@ -14,14 +14,14 @@ block content
             a.navbar-brand(href='/') 
     br
     br
-    #centerInd
+    #centerIndCli
         h1=title
     br
     br
     .productosPart 
         each dt in data
             .product 
-                img(src='../assets/productMen/square.png')
+                img(src=dt.img)
                 .datosProducto 
                     .desc
                         h2=dt.nombre
@@ -30,9 +30,9 @@ block content
                     .aButton
                         a.btn.btn-primary(href ='product-detail/'+dt.id+ '/info') Detalles
 block select
-    .d-flex.justify-content-center
-        .d-inline-flex.p-2.align-items-center
-        | Moneda: 
+    .d-flex.justify-content-center.align-items-center
+        .d-inline-flex.p-2.align-items-center.text-moneda
+            | Moneda: 
         form(method='post' action= 'ropa-hombre')
             select.form-select.text-center.mx-3(name="currencySelect" id="currency" class='currency')
                 option(value='EUR' selected = selectedCur == 1)='EUR'
@@ -44,7 +44,7 @@ block select
                                         = 'Cambiar moneda'
 block imgLog 
     .centerLog
-        img(src='../assets/logoC.png')
+        img(src=logoC)
 
 block scIcon 
-    link(rel="shortcut icon", href="../assets/logoC.png")
+    link(rel="shortcut icon", href=logoC)
