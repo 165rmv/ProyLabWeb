@@ -51,7 +51,7 @@ describe('Pruebas de MochaJS', () => {
             }).then(done, done);
         });
     });
-    
+    /*
     describe('Inventario.insertProducts e Inventario.insertInventory', () => {
         it('Se agrega un producto nuevo a la tabla de "productos" e "inventario"', (done) => {
             Inventario.insertProducts({ nombre: "Playera rosa", tipo: "Playera", genero: "Unisex", precio: 450.00, descripcion: "Playera facherita"})
@@ -69,7 +69,7 @@ describe('Pruebas de MochaJS', () => {
                 });
             });
         });
-    });
+    });*/
 
     describe('Inventario.deleteInventario', () => {
         it('Se obtienen se elimina un producto de la tabla "inventario"', (done) => {
